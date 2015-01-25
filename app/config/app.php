@@ -122,7 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-        'Stolz\Assets\ManagerServiceProvider'
+        'Stolz\Assets\ManagerServiceProvider',
+        'Way\Generators\GeneratorsServiceProvider'
 	),
 
 	/*

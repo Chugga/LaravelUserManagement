@@ -62,10 +62,12 @@ return array(
 	*/
 
 	'collections' => array(
-		'bootstrap' => array(
+		'theme' => array(
 			'bootstrap.min.css',
 			'bootstrap-theme.min.css',
 			'bootstrap.min.js',
+            'style.min.css',
+
 		)
 	),
 

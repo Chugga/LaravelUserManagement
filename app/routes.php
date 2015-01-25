@@ -21,4 +21,5 @@ Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 
 Route::controller('password', 'RemindersController');
-Route::resource('user', 'UserController');
+Route::resource('users', 'UsersController');
+Route::resource('clients', 'ClientsController');

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.master')
 
 @section('title')
     @parent
@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="content">
-        {{ Form::model($user, array('route' => 'user.store', 'method' => 'post')) }}
+        {{ Form::model($user, array('route' => 'users.update', 'method' => 'post')) }}
         <div class="form-group">
             {{ Form::label('username', 'Username') }}
             {{ Form::text('username', array('id' => 'username', 'class' => 'form-control')) }}
@@ -40,6 +40,7 @@
             {{ Form::label('privilege', 'Privilege Level') }}
             {{ Form::number('privilege', array('id' => 'privilege', 'class' => 'form-control', 'step' => 1, 'min' => 0, 'max' => 10)) }}
         </div>
+        {{ Form::submit('Submit', array('class' => 'btn btn-success')) }}
     </div>
 @stop
 

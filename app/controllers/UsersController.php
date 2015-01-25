@@ -9,7 +9,7 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('user.index')
+		return View::make('users.index')
             ->with('users', User::orderBy('last_name', 'asc')->get());
 	}
 
@@ -21,7 +21,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('user.create');
+		return View::make('users.create');
 	}
 
 
@@ -39,7 +39,7 @@ class UserController extends \BaseController {
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
 		} else {
-			Redirect::route('user.index')
+			Redirect::route('users.index')
 				->with('message_success', 'User Created');
 		}
 	}
@@ -53,7 +53,7 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('user.show')
+        return View::make('users.show')
             ->with('user', User::find($id));
 	}
 
@@ -66,7 +66,7 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('user.edit')
+		return View::make('users.edit')
             ->with('user', User::find($id));
 	}
 
@@ -86,7 +86,7 @@ class UserController extends \BaseController {
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
 		} else {
-			Redirect::route('user.index')
+			Redirect::route('users.index')
 				->with('message_success', 'User Updated');
 		}
 	}

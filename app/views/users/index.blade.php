@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.master')
 
 @section('title')
     @parent
@@ -28,7 +28,7 @@
                     <td>{{ $user->first_name }}</td>
                     <td>{{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td><a href="{{ URL::route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ URL::route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a></td>
                 </tr>
             @endforeach
             </tbody>
