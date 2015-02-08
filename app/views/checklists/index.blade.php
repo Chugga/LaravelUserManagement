@@ -13,24 +13,31 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <h1>Checklists</h1>
+            </div>
+            <div class="col-md-6">
                 <a href="{{ URL::route('checklists.create') }}" class="btn btn-primary pull-right">+New Checklist</a>
             </div>
         </div>
+        <br />
+        <br />
         <table id="datatable" class="table table-bordered table-responsive">
             <thead>
             <tr>
-                <th>Job Number</th>
-                <th>User</th>
-                <th>Client</th>
-                <th>Address</th>
+                <th class="col-md-2">Job Number</th>
+                <th class="col-md-2">User</th>
+                <th class="col-md-2">Client</th>
+                <th class="col-md-6">Address</th>
             </tr>
             </thead>
             <tbody>
             @foreach($checklists as $checklist)
                 <tr>
                     <td>{{$checklist->job_number or ''}}</td>
-                    <td>{{$checklist->user->name or ''}}</td>
+                    <td>{{$checklist->user->first_name . " " . $checklist->user->last_name or ''}}</td>
+                    <td>{{$checklist->client->name}}</td>
+                    <td>{{$checklist->address or ''}}</td>
                 </tr>
             @endforeach
             </tbody>

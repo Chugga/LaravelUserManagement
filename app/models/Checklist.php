@@ -17,4 +17,12 @@ class Checklist extends \Eloquent {
     public function cl_sections() {
         return $this->hasMany('ClSection');
     }
+
+    public function client() {
+        return $this->belongsTo('Client');
+    }
+
+    public function user() {
+        return $this->belongsTo('User');
+    }
 }
