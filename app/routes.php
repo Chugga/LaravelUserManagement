@@ -22,3 +22,4 @@ Route::resource('users', 'UsersController');
 Route::resource('clients', 'ClientsController');
 Route::resource('checklists', 'ChecklistsController');
 Route::resource('clsections', 'ClSectionsController');
+Route::resource('clsubsections', 'ClSubsectionsController');

@@ -41,6 +41,7 @@ class ChecklistsController extends \BaseController {
 	{
 		$inputs = Input::all();
 		$checklist = Checklist::create([
+            'job_number' => $inputs['job_number'],
             'checklist_template_id' => $inputs['checklist_template_id'],
             'client_id' => $inputs['client'],
             'address' => $inputs['address'],

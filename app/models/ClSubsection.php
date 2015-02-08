@@ -10,8 +10,8 @@ class ClSubsection extends \Eloquent {
 	// Don't forget to fill this array
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function subsection_template() {
-        return $this->belongsTo('SubsectionTemplate');
+    public function cl_subsection_template() {
+        return $this->belongsTo('ClSubsectionTemplate');
     }
 
     public function cl_section() {

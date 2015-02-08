@@ -21,6 +21,12 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
+                    {{ Form::label('job_number', 'Job Number') }}
+                    {{ Form::text('job_number', null, array('id' => 'client', 'class' => 'form-control', 'required')) }}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     {{ Form::label('client', 'Client') }}
                     {{ Form::select('client', $clients, null, array('id' => 'client', 'class' => 'form-control')) }}
                 </div>
@@ -37,7 +43,7 @@
                     {{ Form::text('weather', null, array('id' => 'weather', 'class' => 'form-control')) }}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     {{ Form::label('conducted_at', 'Conducted At') }}
                     <div class='input-group date' id='datetimepicker1'>

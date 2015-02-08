@@ -28,16 +28,18 @@
                 <th class="col-md-2">Job Number</th>
                 <th class="col-md-2">User</th>
                 <th class="col-md-2">Client</th>
-                <th class="col-md-6">Address</th>
+                <th class="col-md-4">Address</th>
+                <th class="col-md-2">Open</th>
             </tr>
             </thead>
             <tbody>
             @foreach($checklists as $checklist)
                 <tr>
                     <td>{{$checklist->job_number or ''}}</td>
-                    <td>{{$checklist->user->first_name . " " . $checklist->user->last_name or ''}}</td>
-                    <td>{{$checklist->client->name}}</td>
+                    <td>{{$checklist->user->first_name . " " . $checklist->user->last_name}}</td>
+                    <td>{{$checklist->client->name or ''}}</td>
                     <td>{{$checklist->address or ''}}</td>
+                    <td><a href="" class="btn btn-primary">Edit</a></td>
                 </tr>
             @endforeach
             </tbody>
