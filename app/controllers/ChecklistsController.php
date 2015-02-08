@@ -1,5 +1,7 @@
 <?php
 
+use \Carbon\Carbon;
+
 class ChecklistsController extends \BaseController {
 
 	/**
@@ -9,9 +11,11 @@ class ChecklistsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$checklists = Checklist::all();
+        Assets::add(array('theme', 'datatables'));
+		$checklists = Checklist::with(array('client', 'user'))->get();
 
-		return View::make('checklists.index', compact('checklists'));
+		return View::make('checklists.index')
+            ->with('checklists', $checklists);
 	}
 
 	/**
@@ -21,8 +25,8 @@ class ChecklistsController extends \BaseController {
 	 */
 	public function create()
 	{
-        $checklist_template = ChecklistTemplate::with('cl_section_templates.cl_subsection_templates')->find(1);
-
+        Assets::add(array('theme','datepicker'));
+        $checklist_template = ChecklistTemplate::whereId(1)->with('cl_section_templates.cl_subsection_templates')->first();
 		return View::make('checklists.create')
             ->with('checklist_template', $checklist_template)
             ->with('clients', Client::lists('name', 'id'));
@@ -35,16 +39,30 @@ class ChecklistsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Checklist::$rules);
+		$inputs = Input::all();
+		$checklist = Checklist::create([
+            'checklist_template_id' => $inputs['checklist_template_id'],
+            'client_id' => $inputs['client'],
+            'address' => $inputs['address'],
+            'weather' => $inputs['weather'],
+            'conducted_at' => strlen($inputs['conducted_at']) > 0 ? Carbon::parse($inputs['conducted_at']) : '',
+            'user_id' => Auth::user()->id
+        ]);
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+        $section_number = 0;
+        $subsection_number = 0;
+        foreach($inputs['subsections_number'] as $sec_key => $sec_val) {
+            $section = ChecklistGenerator::section($checklist->id, $sec_key, $section_number);
+            foreach($sec_val as $sub_key => $sub_val) {
+                for($i = 0; $i < $sub_val; $i++ ) {
+                    ChecklistGenerator::subsection($section->id, $sub_key, $subsection_number);
+                    $subsection_number++;
+                }
+            }
+            $section_number++;
+        }
 
-		Checklist::create($data);
-
-		return Redirect::route('checklists.index');
+		return Redirect::route('cl_sections.edit');
 	}
 
 	/**
@@ -55,6 +73,7 @@ class ChecklistsController extends \BaseController {
 	 */
 	public function show($id)
 	{
+        Assets::add('theme');
 		$checklist = Checklist::findOrFail($id);
 
 		return View::make('checklists.show', compact('checklist'));
@@ -68,6 +87,7 @@ class ChecklistsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+        Assets::add('theme');
 		$checklist = Checklist::find($id);
 
 		return View::make('checklists.edit', compact('checklist'));

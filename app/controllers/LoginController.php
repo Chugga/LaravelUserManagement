@@ -17,20 +17,26 @@ class LoginController extends BaseController {
 
     public function showLogin()
     {
+        Assets::add('theme');
+
         return View::make('login');
     }
 
     public function login(){
+        Log::info(print_r(Input::all(), true));
         if (Auth::attempt(array('username' => Input::get('username'), 'password' =>  Input::get('password')))){
             //Redirect
             return Redirect::intended('/');
         }else{
             //Die
-            return Redirect::to('/login')->with('message_error', 'Could not authenticate with the provided username and password');
+            return Redirect::to('/login')
+                ->with('message_error', 'Could not authenticate with the provided username and password')
+                ->withInput();
         }
     }
 
     public function logout(){
+
         Auth::logout();
         return Redirect::to('/login');
     }

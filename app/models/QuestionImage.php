@@ -11,6 +11,6 @@ class QuestionImage extends \Eloquent {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function cl_question() {
-        $this->belongsTo('ClQuestion');
+        return $this->belongsTo('ClQuestion');
     }
 }

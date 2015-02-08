@@ -20,7 +20,7 @@
 
     {{-- Always load CSS classes inside the head --}}
     {{ Assets::css() }}
-    @yield('styles')
+    @yield('stylesheets')
 
 </head>
 

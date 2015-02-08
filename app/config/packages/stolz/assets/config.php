@@ -15,8 +15,8 @@ return array(
 	| Default for packages: 'packages'
 	*/
 
-	'css_dir' => 'css',
-	'js_dir' => 'js',
+	'css_dir' => '/assets/css',
+	'js_dir' => '/assets/js',
 	'packages_dir' => 'packages',
 
 	/*
@@ -63,12 +63,30 @@ return array(
 
 	'collections' => array(
 		'theme' => array(
+            'jquery-1.10.2.js',
+            'jquery-ui-1.10.4.min.js',
+            'jquery-ui.custom.min.js',
+            'plugins/metisMenu/jquery.metisMenu.js',
+            'inspinia.js',
 			'bootstrap.min.css',
 			'bootstrap-theme.min.css',
 			'bootstrap.min.js',
+            'font-awesome.min.css',
+            'animate.css',
             'style.min.css',
+		),
 
-		)
+        'datatables' => array(
+            'plugins/dataTables/jquery.dataTables.js',
+            'plugins/dataTables/dataTables.bootstrap.js',
+            'plugins/dataTables/dataTables.bootstrap.css',
+        ),
+
+        'datepicker' => array(
+            'moment.js',
+            'bootstrap-datetimepicker.min.js',
+            'bootstrap-datetimepicker.min.css'
+        )
 	),
 
 	/*

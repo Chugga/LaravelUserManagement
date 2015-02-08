@@ -11,10 +11,10 @@ class Checklist extends \Eloquent {
 	protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function checklist_template() {
-        $this->belongsTo('ChecklistTemplate');
+        return $this->belongsTo('ChecklistTemplate');
     }
 
     public function cl_sections() {
-        $this->hasMany('ClSection');
+        return $this->hasMany('ClSection');
     }
 }

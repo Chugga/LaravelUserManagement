@@ -9,6 +9,7 @@ class ClientsController extends \BaseController {
 	 */
 	public function index()
 	{
+        Assets::add('theme');
 		$clients = Client::all();
 
         return View::make('clients.index')
@@ -22,6 +23,7 @@ class ClientsController extends \BaseController {
 	 */
 	public function create()
 	{
+        Assets::add('theme');
 		return View::make('clients.create');
 	}
 
@@ -52,6 +54,7 @@ class ClientsController extends \BaseController {
 	 */
 	public function show($id)
 	{
+        Assets::add('theme');
 		$client = Client::findOrFail($id);
 
 		return View::make('clients.show')
@@ -66,6 +69,7 @@ class ClientsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+        Assets::add('theme');
 		$client = Client::find($id);
 
 		return View::make('clients.edit')

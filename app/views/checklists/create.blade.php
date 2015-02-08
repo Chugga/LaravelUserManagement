@@ -2,40 +2,85 @@
 
 @section('title')
     @parent
-    Create Client
+    Create Checklist
 @stop
 
 @section('stylesheets')
-
+<style>
+    .align-right {
+        float:right;
+        clear:both;
+    }
+</style>
 @stop
 
 @section('content')
     <div class="content">
-        {{ Form::open(array('route' => 'clients.store', 'method' => 'post')) }}
-        <div class="form-group">
-            {{ Form::label('name', 'Name') }}
-            {{ Form::text('name', array('id' => 'name', 'class' => 'form-control')) }}
+        <h1>Create new Checklist</h1>
+        {{ Form::open(array('route' => 'checklists.store', 'method' => 'post', 'class' => '')) }}
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {{ Form::label('client', 'Client') }}
+                    {{ Form::select('client', $clients, null, array('id' => 'client', 'class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ Form::label('address', 'Address') }}
+                    {{ Form::text('address', null, array('id' => 'address', 'class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ Form::label('weather', 'Weather') }}
+                    {{ Form::text('weather', null, array('id' => 'weather', 'class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ Form::label('conducted_at', 'Conducted At') }}
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input id="conducted_at" name="conducted_at" type='text' class="form-control" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {{ Form::hidden('checklist_template_id', $checklist_template->id) }}
         </div>
-        <div class="form-group">
-            {{ Form::label('description', 'Description') }}
-            {{ Form::text('description', array('id' => 'description', 'class' => 'form-control')) }}
-        </div>
-        <div class="form-group">
-            {{ Form::label('email_one', 'Email One') }}
-            {{ Form::email('email_one', array('id' => 'email_one', 'class' => 'form-control')) }}
-        </div>
-        <div class="form-group">
-            {{ Form::label('email_two', 'Email Two') }}
-            {{ Form::email('email_two', array('id' => 'email_two', 'class' => 'form-control')) }}
-        </div>
+        @foreach($checklist_template->cl_section_templates as $section_template)
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ $section_template->name }}</h2>
+                    <h3>{{ $section_template->subsection_titles }}</h3>
+                    @foreach($section_template->cl_subsection_templates as $subsection_template)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('subsection_number', $subsection_template->name) }}
+                                {{ Form::selectRange("subsections_number[$section_template->id][$subsection_template->id]", '0', '10', '0', array('id' => 'subsection_number', 'class' => 'form-control align-right')) }}
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
 
-        {{ Form::submit('Submit', array('class' => 'btn btn-success')) }}
+        {{ Form::submit('Submit', array('class' => 'btn btn-success pull-right')) }}
     </div>
 @stop
 
 
 @section('javascripts')
-
+<script>
+    $(document).ready(function(){
+        $('#datetimepicker1').datetimepicker({
+            useCurrent: true
+        });
+    });
+</script>
 @stop
 
 

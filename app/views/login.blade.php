@@ -4,7 +4,7 @@
     Login
 @stop
 
-@section('styles')
+@section('stylesheets')
 
 @stop
 

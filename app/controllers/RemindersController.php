@@ -9,6 +9,7 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
+        Assets::add('theme');
 		return View::make('password.remind');
 	}
 
@@ -19,6 +20,7 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
+        Log::info(Input::only('email'));
 		switch ($response = Password::remind(Input::only('email')))
 		{
 			case Password::INVALID_USER:
@@ -37,6 +39,7 @@ class RemindersController extends Controller {
 	 */
 	public function getReset($token = null)
 	{
+        Assets::add('theme');
 		if (is_null($token)) App::abort(404);
 
 		return View::make('password.reset')->with('token', $token);

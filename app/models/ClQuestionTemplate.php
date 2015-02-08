@@ -11,10 +11,10 @@ class ClQuestionTemplate extends \Eloquent {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function cl_questions() {
-        $this->hasMany('ClQuestion');
+        return $this->hasMany('ClQuestion');
     }
 
     public function cl_subsection_template() {
-        $this->belongsTo('ClSubsectionTemplate');
+        return $this->belongsTo('ClSubsectionTemplate');
     }
 }

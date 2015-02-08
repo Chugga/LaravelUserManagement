@@ -59,7 +59,7 @@ return array(
             'display' => 'Logout',
             'icon' => 'fa-sign-out',
             'privilege' => 0,
-            'route_name' => '',
+            'route_name' => 'logout',
         ),
     ),
 );

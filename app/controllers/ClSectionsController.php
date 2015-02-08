@@ -9,6 +9,7 @@ class ClSectionsController extends \BaseController {
 	 */
 	public function index()
 	{
+        Assets::add('theme');
 		$clsections = Clsection::all();
 
 		return View::make('clsections.index', compact('clsections'));
@@ -21,6 +22,7 @@ class ClSectionsController extends \BaseController {
 	 */
 	public function create()
 	{
+        Assets::add('theme');
 		return View::make('clsections.create');
 	}
 
@@ -51,6 +53,7 @@ class ClSectionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
+        Assets::add('theme');
 		$clsection = Clsection::findOrFail($id);
 
 		return View::make('clsections.show', compact('clsection'));
@@ -64,6 +67,7 @@ class ClSectionsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+        Assets::add('theme');
 		$clsection = Clsection::find($id);
 
 		return View::make('clsections.edit', compact('clsection'));

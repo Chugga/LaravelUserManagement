@@ -1,4 +1,5 @@
 <?php ?>
+
 <nav class="navbar-default navbar-static-side" role="navigation" style="z-index: 1000000000;">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
@@ -11,7 +12,7 @@
                 @if($item['privilege'] <= Auth::user()->privilege)
                     @if(isset($item['route_name']))
                         <li class="{{Route::currentRouteName() == $item['route_name'] ? 'active' : ''}}">
-                            <a href="{{URL::route($item['route_name'])}}"><span class="nav-label"><i class="fa {{ $item['icon'] }}"></i>{{ $item['display'] }}</span></a>
+                            <a href="{{URL::route($item['route_name'])}}" style="background-color:#2F4050;"><span class="nav-label"><i class="fa {{ $item['icon'] }}"></i>{{ $item['display'] }}</span></a>
                         </li>
                     @else
                         <li class="{{in_array(Route::currentRouteName(),NavHelper::routes($item['links']))?'active' : ''}} ">
@@ -20,7 +21,7 @@
                                 @foreach($item['links'] as $link)
                                     @if($link['privilege'] <= Auth::user()->privilege)
                                         <li class="{{Route::currentRouteName() == $link['route_name'] ? 'active' : ''}}">
-                                            <a href="{{URL::route($link['route_name'])}}"><span class="nav-label"><i class="fa {{ $link['icon'] }}"></i>{{ $link['display'] }}</span></a>
+                                            <a href="{{URL::route($link['route_name'])}}" style="background-color:#2F4050;"><span class="nav-label"><i class="fa {{ $link['icon'] }}"></i>{{ $link['display'] }}</span></a>
                                         </li>
                                     @endif
                                 @endforeach

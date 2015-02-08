@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', 'LoginController@showLogin');
+Route::get('/', 'ChecklistsController@index');
 
 Route::get('/login', 'LoginController@showLogin');
 Route::post('/login', 'LoginController@login');
-Route::get('/logout', 'LoginController@logout');
+Route::get('/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
 
 Route::controller('password', 'RemindersController');
 Route::resource('users', 'UsersController');
 Route::resource('clients', 'ClientsController');
+Route::resource('checklists', 'ChecklistsController');
+Route::resource('clsections', 'ClSectionsController');
