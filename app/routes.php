@@ -23,10 +23,10 @@ Route::group(array('before' => 'auth'), function() {
     Route::resource('checklists', 'ChecklistsController');
     Route::resource('clsections', 'ClSectionsController');
     Route::resource('clsubsections', 'ClSubsectionsController');
+    Route::get('/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
 });
 
 Route::group(array('before' => 'guest'), function() {
     Route::get('/login', 'LoginController@showLogin');
     Route::post('/login', 'LoginController@login');
-    Route::get('/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
 });
