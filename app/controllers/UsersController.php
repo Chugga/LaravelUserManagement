@@ -36,9 +36,10 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		$user = new User(Input::all());
+        $inputs = Input::all();
+		$user = new User($inputs);
 
-		if(!$user->save()) {
+		if(empty($inputs['password']) || $inputs['password'] !== $inputs['confirm_password'] || !$user->save()) {
 			return Redirect::back()
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
@@ -85,7 +86,13 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 
-		if(!$user->update(Input::all())) {
+        $inputs = Input::all();
+
+        if(empty($inputs['password']) || $inputs['password'] !== $inputs['confirm_password']) {
+            unset($inputs['password']);
+        }
+
+		if(!$user->update($inputs)) {
 			return Redirect::back()
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
