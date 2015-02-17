@@ -147,7 +147,7 @@ class ChecklistsController extends \BaseController {
         }))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('checklist - ' . $checklist->id . '.pdf');
     }
 
 }
