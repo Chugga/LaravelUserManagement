@@ -62,7 +62,7 @@
                 </div>
             </div>
         @endforeach
-
+        <a href="{{ URL::route('checklists.pdf', $checklist->id) }}" class="btn btn-primary pull-right">Download as PDF</a>
         <a href="" class="btn btn-success pull-right">Send Checklist</a>
     </div>
 @stop
