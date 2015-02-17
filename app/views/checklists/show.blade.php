@@ -47,12 +47,20 @@
                                     @endif
                                     @foreach($subsection->cl_questions as $question)
                                         @if(!$question->pass)
-                                            <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }} : </strong>{{ $question->answer }}</p>
-                                            @foreach($question->question_images as $image)
-                                                <div class="col-md-6">
-                                                    <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }} : </strong>{{ $question->answer }}</p>
                                                 </div>
-                                            @endforeach
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @foreach($question->question_images as $image)
+                                                        <div class="col-md-6">
+                                                            <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         @endif
                                     @endforeach
                                 </div>
