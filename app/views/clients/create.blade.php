@@ -12,7 +12,7 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-6">
                 <h1>Create Client</h1>
                 {{ Form::open(array('route' => 'clients.store', 'method' => 'post')) }}
                 <div class="form-group">

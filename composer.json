@@ -8,8 +8,9 @@
 		"laravel/framework": "4.2.*",
         "doctrine/dbal": "2.3.*",
         "barryvdh/laravel-ide-helper": "1.11.*",
-        "stolz/assets": "dev-master",
-        "way/generators": "~2.0"
+        "stolz/assets": "0.0.9",
+        "way/generators": "~2.0",
+        "barryvdh/laravel-snappy": "0.1.x"
 	},
 	"autoload": {
 		"classmap": [

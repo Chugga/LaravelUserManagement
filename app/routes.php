@@ -21,6 +21,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::resource('users', 'UsersController');
     Route::resource('clients', 'ClientsController');
     Route::resource('checklists', 'ChecklistsController');
+    Route::get('checklists/{id}/pdf', array('uses' => 'ChecklistsController@getPDF', 'as' => 'checklists.pdf'));
     Route::resource('clsections', 'ClSectionsController');
     Route::resource('clsubsections', 'ClSubsectionsController');
     Route::get('/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));

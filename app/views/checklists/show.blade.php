@@ -49,7 +49,9 @@
                                         @if(!$question->pass)
                                             <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }} : </strong>{{ $question->answer }}</p>
                                             @foreach($question->question_images as $image)
-                                                <img src="/photos/{{ $image->filename }}" style="max-width:50%" />
+                                                <div class="col-md-6">
+                                                    <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
+                                                </div>
                                             @endforeach
                                         @endif
                                     @endforeach

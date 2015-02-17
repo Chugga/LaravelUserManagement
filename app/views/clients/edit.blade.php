@@ -12,7 +12,7 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-6">
                 <h1>Edit Client</h1>
                 {{ Form::model($client, array('route' => array('clients.update', $client->id), 'method' => 'put')) }}
                 <div class="form-group">

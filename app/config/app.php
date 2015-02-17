@@ -123,7 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Stolz\Assets\ManagerServiceProvider',
-        'Way\Generators\GeneratorsServiceProvider'
+        'Way\Generators\GeneratorsServiceProvider',
+        'Barryvdh\Snappy\ServiceProvider',
 	),
 
 	/*
@@ -190,6 +191,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+        'PDF'               => 'Barryvdh\Snappy\Facades\SnappyPdf',
+        'Image'             => 'Barryvdh\Snappy\Facades\SnappyImage',
 
 	),
 

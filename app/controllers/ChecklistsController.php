@@ -139,4 +139,15 @@ class ChecklistsController extends \BaseController {
 		return Redirect::route('checklists.index');
 	}
 
+    public function getPDF($id) {
+        Assets::add('theme');
+        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+            $q->where('cl_questions.pass', '=', false)
+                ->with('cl_question_template', 'question_images');
+        }))->findOrFail($id);
+
+        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+        return $pdf->download('invoice.pdf');
+    }
+
 }
