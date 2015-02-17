@@ -77,13 +77,7 @@
 
 
 @section('javascripts')
-    <script>
-        $(document).ready(function(){
-            $('#datetimepicker1').datetimepicker({
-                useCurrent: true
-            });
-        });
-    </script>
+
 @stop
 
 
