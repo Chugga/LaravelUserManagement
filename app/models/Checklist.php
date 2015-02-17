@@ -7,6 +7,8 @@ class Checklist extends \Eloquent {
 		// 'title' => 'required'
 	];
 
+    public $dates = ['conducted_at'];
+
 	// Don't forget to fill this array
 	protected $guarded = ['id', 'created_at', 'updated_at'];
 

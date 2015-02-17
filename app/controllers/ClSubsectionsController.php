@@ -82,7 +82,7 @@ class ClSubsectionsController extends \BaseController {
             }
         }
 
-		$clsubsection = ClSubsection::with('cl_questions.cl_question_template')->whereId($id)->first();
+		$clsubsection = ClSubsection::with('cl_subsection_template', 'cl_questions.cl_question_template')->whereId($id)->first();
 
 		return View::make('cl_subsections.edit')
             ->with('checklist', $checklist)
@@ -98,18 +98,34 @@ class ClSubsectionsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$clsubsection = ClSubsection::findOrFail($id);
+		$clsubsection = ClSubsection::with('cl_section.checklist')->findOrFail($id);
+        $questions = Input::all()['question'];
 
-		$validator = Validator::make($data = Input::all(), ClSubsection::$rules);
+        /*echo "<pre>";
+        print_r(Input::all());
+        echo "</pre>";
+        exit;*/
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+        foreach($questions as $id => $question) {
+            $question_mod = ClQuestion::find($id);
+            $question_mod->pass = isset($question['pass']);
+            if(!empty($question['answer'])) $question_mod->answer = $question['answer'];
+            $question_mod->save();
 
-		$clsubsection->update($data);
+            if(!empty($question['photo'])) {
+                $image = QuestionImage::create(array('cl_question_id' => $id));
+                $image->filename = $image->id . "." .$question['photo']->getClientOriginalExtension();
+                $image->save();
+                $question['photo']->move($_SERVER['DOCUMENT_ROOT']. '/photos', $image->id . "." . $question['photo']->getClientOriginalExtension());
+            }
+        }
+        $next_subsection = ClSubsection::whereSubsectionNumber($clsubsection->subsection_number+1)->first();
+        if(isset($next_subsection)) {
+            return Redirect::route('clsubsections.edit', $next_subsection->id);
+        } else {
+            return Redirect::route('checklists.show', $clsubsection->cl_section->checklist->id);
+        }
 
-		return Redirect::route('clsubsections.index');
 	}
 
 	/**

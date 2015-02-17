@@ -56,6 +56,24 @@ return array(
             ),
         ),*/
         array(
+            'display' => 'Checklists',
+            'icon' => 'fa-clipboard',
+            'privilege' => 0,
+            'route_name' => 'checklists.index'
+        ),
+        array(
+            'display' => 'Clients',
+            'icon' => 'fa-archive',
+            'privilege' => 0,
+            'route_name' => 'clients.index'
+        ),
+        array(
+            'display' => 'Users',
+            'icon' => 'fa-users',
+            'privilege' => 10,
+            'route_name' => 'users.index'
+        ),
+        array(
             'display' => 'Logout',
             'icon' => 'fa-sign-out',
             'privilege' => 0,

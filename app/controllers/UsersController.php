@@ -1,6 +1,10 @@
 <?php
 
-class UserController extends \BaseController {
+class UsersController extends \BaseController {
+
+    public function __construct() {
+        Assets::add(array('theme'));
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -35,11 +39,11 @@ class UserController extends \BaseController {
 		$user = new User(Input::all());
 
 		if(!$user->save()) {
-			Redirect::back()
+			return Redirect::back()
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
 		} else {
-			Redirect::route('users.index')
+			return Redirect::route('users.index')
 				->with('message_success', 'User Created');
 		}
 	}
@@ -82,11 +86,11 @@ class UserController extends \BaseController {
 		$user = User::find($id);
 
 		if(!$user->update(Input::all())) {
-			Redirect::back()
+			return Redirect::back()
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
 		} else {
-			Redirect::route('users.index')
+			return Redirect::route('users.index')
 				->with('message_success', 'User Updated');
 		}
 	}

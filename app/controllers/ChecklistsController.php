@@ -12,7 +12,13 @@ class ChecklistsController extends \BaseController {
 	public function index()
 	{
         Assets::add(array('theme', 'datatables'));
-		$checklists = Checklist::with(array('client', 'user'))->get();
+		$checklists = Checklist::with(array('client', 'user', 'cl_sections' => function($q) {
+            $q->whereHas('cl_subsections', function($q) {
+                $q->whereSubsectionNumber(0);
+            })->with(array('cl_subsections' => function($q) {
+                $q->whereSubsectionNumber(0);
+            }));
+        }))->get();
 
 		return View::make('checklists.index')
             ->with('checklists', $checklists);
@@ -75,9 +81,13 @@ class ChecklistsController extends \BaseController {
 	public function show($id)
 	{
         Assets::add('theme');
-		$checklist = Checklist::findOrFail($id);
-
-		return View::make('checklists.show', compact('checklist'));
+		$checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+            $q->where('cl_questions.pass', '=', false)
+                ->with('cl_question_template', 'question_images');
+        }))->findOrFail($id);
+		return View::make('checklists.show')
+            ->with('checklist', $checklist)
+            ->with('i', 1);
 	}
 
 	/**

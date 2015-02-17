@@ -39,7 +39,7 @@
                     <td>{{$checklist->user->first_name . " " . $checklist->user->last_name}}</td>
                     <td>{{$checklist->client->name or ''}}</td>
                     <td>{{$checklist->address or ''}}</td>
-                    <td><a href="" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ URL::route('clsubsections.edit', array($checklist->cl_sections[0]->cl_subsections[0]->id)) }}" class="btn btn-primary">Edit</a></td>
                 </tr>
             @endforeach
             </tbody>
