@@ -10,7 +10,7 @@ class ChecklistGenerator {
     }
 
     public static function subsection($section_id, $template_id, $subsection_number) {
-        $cl_subsection = ClSubSection::create([
+        $cl_subsection = ClSubsection::create([
             'cl_section_id' => $section_id,
             'cl_subsection_template_id' => $template_id,
             'subsection_number' => $subsection_number
@@ -20,7 +20,7 @@ class ChecklistGenerator {
             self::question($cl_subsection->id, $template->id);
         }
 
-        return ClSubSection::with('cl_questions')->find($cl_subsection->id);
+        return ClSubsection::with('cl_questions')->find($cl_subsection->id);
     }
 
     public static function question($subsection_id, $template_id) {

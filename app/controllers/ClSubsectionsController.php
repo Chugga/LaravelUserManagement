@@ -31,14 +31,14 @@ class ClSubsectionsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Clsubsection::$rules);
+		$validator = Validator::make($data = Input::all(), ClSubsection::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Clsubsection::create($data);
+		ClSubsection::create($data);
 
 		return Redirect::route('clsubsections.index');
 	}

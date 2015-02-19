@@ -37,9 +37,13 @@ class UsersController extends \BaseController {
 	public function store()
 	{
         $inputs = Input::all();
+        $confirm = $inputs['confirm_password'];
+        unset($inputs['confirm_password']);
 		$user = new User($inputs);
 
-		if(empty($inputs['password']) || $inputs['password'] !== $inputs['confirm_password'] || !$user->save()) {
+        $user->password = Hash::make($user->password);
+
+		if(empty($inputs['password']) || $inputs['password'] !== $confirm || !$user->save()) {
 			return Redirect::back()
 				->with('message_error', 'There was an error saving the user, please ensure all form inputs are filled in correctly')
 				->withInput();
@@ -90,7 +94,11 @@ class UsersController extends \BaseController {
 
         if(empty($inputs['password']) || $inputs['password'] !== $inputs['confirm_password']) {
             unset($inputs['password']);
+        } else {
+            $inputs['password'] = Hash::make($inputs['password']);
         }
+
+        unset($inputs['confirm_password']);
 
 		if(!$user->update($inputs)) {
 			return Redirect::back()
