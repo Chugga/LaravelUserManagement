@@ -58,18 +58,20 @@ class ChecklistsController extends \BaseController {
 
         $section_number = 0;
         $subsection_number = 0;
+        $subsection = null;
         foreach($inputs['subsections_number'] as $sec_key => $sec_val) {
             $section = ChecklistGenerator::section($checklist->id, $sec_key, $section_number);
             foreach($sec_val as $sub_key => $sub_val) {
                 for($i = 0; $i < $sub_val; $i++ ) {
-                    ChecklistGenerator::subsection($section->id, $sub_key, $subsection_number);
+                    $subs = ChecklistGenerator::subsection($section->id, $sub_key, $subsection_number);
+                    if($subsection_number === 0) $subsection = $subs;
                     $subsection_number++;
                 }
             }
             $section_number++;
         }
 
-		return Redirect::route('cl_sections.edit');
+		return Redirect::route('clsubsections.edit', $subsection->id);
 	}
 
 	/**
