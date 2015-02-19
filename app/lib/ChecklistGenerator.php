@@ -16,7 +16,7 @@ class ChecklistGenerator {
             'subsection_number' => $subsection_number
         ]);
 
-        foreach(CLQuestionTemplate::where('cl_subsection_template_id', '=', $template_id)->get() as $template) {
+        foreach(ClQuestionTemplate::where('cl_subsection_template_id', '=', $template_id)->get() as $template) {
             self::question($cl_subsection->id, $template->id);
         }
 
