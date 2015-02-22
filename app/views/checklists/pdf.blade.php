@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-    <div class="content">
+    <div class="content" style="background-color:#fff;">
         <div class="page-content white-bg" style="margin-left:0;">
             <h1>Job Number {{ $checklist->job_number or 'N/A'}}</h1>
             <div class="row">
@@ -56,7 +56,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         @foreach($question->question_images as $image)
-                                                                <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:30%; margin-left:10%; margin-right:10%" />
+                                                                <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
                                                         @endforeach
                                                     </div>
                                                 </div>

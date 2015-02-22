@@ -149,7 +149,33 @@ class ChecklistsController extends \BaseController {
         }))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
-        return $pdf->download('checklist - ' . $checklist->id . '.pdf');
+        return $pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf');
+    }
+
+    public function getMail($id) {
+        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+            $q->where('cl_questions.pass', '=', false)
+                ->with('cl_question_template', 'question_images');
+        }))->findOrFail($id);
+
+        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+
+        Mail::send('emails.report', ['checklist' => $checklist], function($message) use ($id, $pdf, $checklist)
+        {
+            $message->from('info@kelvincourt.com.au', 'Kelvin Court');
+
+            $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
+
+            if(!empty($checklist->client->email_one)) {
+                $message->to($checklist->client->email_one);
+            }
+
+            if(!empty($checklist->client->email_two)) {
+                $message->to($checklist->client->email_two);
+            }
+
+            $message->attach($pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf'));
+        });
     }
 
 }
