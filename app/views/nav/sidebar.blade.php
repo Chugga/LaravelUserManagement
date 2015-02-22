@@ -5,7 +5,7 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <strong class="font-bold" style="color: white;">{{Auth::user()->first_name}} {{ Auth::user()->first_name }}</strong>
+                    <strong class="font-bold" style="color: white;">{{Auth::user()->first_name}} {{ Auth::user()->last_name }}</strong>
                 </div>
             </li>
             @foreach(Config::get('navigation.sidebar_items') as $item)
