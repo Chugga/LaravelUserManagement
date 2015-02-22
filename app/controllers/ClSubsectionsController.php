@@ -114,10 +114,12 @@ class ClSubsectionsController extends \BaseController {
 
             if(!empty($question['photo'])) {
                 foreach($question['photo'] as $photo) {
-                    $image = QuestionImage::create(array('cl_question_id' => $id));
-                    $image->filename = $image->id . "." . $photo->getClientOriginalExtension();
-                    $image->save();
-                    $photo->move($_SERVER['DOCUMENT_ROOT'] . '/photos', $image->id . "." . $photo->getClientOriginalExtension());
+                    if(!empty($photo)) {
+                        $image = QuestionImage::create(array('cl_question_id' => $id));
+                        $image->filename = $image->id . "." . $photo->getClientOriginalExtension();
+                        $image->save();
+                        $photo->move($_SERVER['DOCUMENT_ROOT'] . '/photos', $image->id . "." . $photo->getClientOriginalExtension());
+                    }
                 }
             }
         }
