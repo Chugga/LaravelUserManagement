@@ -22,7 +22,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {{ Form::label('job_number', 'Job Number') }}
-                    {{ Form::text('job_number', null, array('id' => 'client', 'class' => 'form-control', 'required')) }}
+                    {{ Form::text('job_number', null, array('id' => 'client', 'class' => 'form-control', 'required' => 'required')) }}
                 </div>
             </div>
             <div class="col-md-2">
@@ -34,20 +34,20 @@
             <div class="col-md-3">
                 <div class="form-group">
                     {{ Form::label('address', 'Address') }}
-                    {{ Form::text('address', null, array('id' => 'address', 'class' => 'form-control')) }}
+                    {{ Form::text('address', null, array('id' => 'address', 'class' => 'form-control', 'required' => 'required')) }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     {{ Form::label('weather', 'Weather') }}
-                    {{ Form::text('weather', null, array('id' => 'weather', 'class' => 'form-control')) }}
+                    {{ Form::text('weather', null, array('id' => 'weather', 'class' => 'form-control', 'required' => 'required')) }}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     {{ Form::label('conducted_at', 'Conducted At') }}
                     <div class='input-group date' id='datetimepicker1'>
-                        <input id="conducted_at" name="conducted_at" type='text' class="form-control" />
+                        <input id="conducted_at" name="conducted_at" type='text' class="form-control" required="required" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
