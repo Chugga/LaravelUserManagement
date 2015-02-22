@@ -123,7 +123,11 @@ class ClSubsectionsController extends \BaseController {
                 }
             }
         }
-        $next_subsection = ClSubsection::whereSubsectionNumber($clsubsection->subsection_number+1)->first();
+        $next_subsection = ClSubsection::whereSubsectionNumber($clsubsection->subsection_number+1)->whereHas('cl_section', function($q) use ($clsubsection) {
+            $q->whereHas('checklist', function($q) use ($clsubsection) {
+                $q->whereId($clsubsection->cl_section->checklist->id);
+            });
+        })->first();
         if(isset($next_subsection)) {
             return Redirect::route('clsubsections.edit', $next_subsection->id);
         } else {
