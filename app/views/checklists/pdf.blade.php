@@ -15,8 +15,8 @@
 @stop
 
 @section('content')
-    <div class="content" style="background-color:#fff;">
-        <div class="page-content white-bg" style="margin-left:0;">
+    <div class="content" style="background-color:#fff; margin: 5px;">
+        <div class="page-content white-bg" style="margin: 0;">
             <h1>Job Number {{ $checklist->job_number or 'N/A'}}</h1>
             <div class="row">
                 <div class="col-md-4">

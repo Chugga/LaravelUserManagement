@@ -142,7 +142,6 @@ class ChecklistsController extends \BaseController {
 	}
 
     public function getPDF($id) {
-        //Assets::add('theme');
         $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
             $q->where('cl_questions.pass', '=', false)
                 ->with('cl_question_template', 'question_images');
@@ -153,29 +152,27 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
-        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
-            $q->where('cl_questions.pass', '=', false)
-                ->with('cl_question_template', 'question_images');
-        }))->findOrFail($id);
+        try {
+            $checklist = Checklist::with('client')->findOrFail($id);
+            Mail::send('emails.report', ['checklist' => $checklist], function($message) use ($id, $checklist)
+            {
+                $message->from('info@kelvincourt.com.au', 'Kelvin Court');
 
-        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+                $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
 
-        Mail::send('emails.report', ['checklist' => $checklist], function($message) use ($id, $pdf, $checklist)
-        {
-            $message->from('info@kelvincourt.com.au', 'Kelvin Court');
+                if(!empty($checklist->client->email_one)) {
+                    $message->to($checklist->client->email_one);
+                }
 
-            $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
+                if(!empty($checklist->client->email_two)) {
+                    $message->to($checklist->client->email_two);
+                }
+            });
+        } catch (Exception $e) {
+            Log::error(print_r([$e->getFile(), $e->getLine(), $e->getCode(), $e->getMessage(), $e->getTraceAsString()],true));
+            return Redirect::back()->with('message_error', 'Failed to send email.');
+        }
 
-            if(!empty($checklist->client->email_one)) {
-                $message->to($checklist->client->email_one);
-            }
-
-            if(!empty($checklist->client->email_two)) {
-                $message->to($checklist->client->email_two);
-            }
-
-            $message->attach($pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf'));
-        });
+        return Redirect::back()->with('message_success', 'Report sent.');
     }
-
 }
