@@ -23,7 +23,7 @@
                 <div class="col-md-4" style="width: 40%;">
                     <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
                 </div>
-                <div class="col-md-8" style="width:60%;">
+                <div class="col-md-8" style="width:50%;">
                     <p><strong>Address:</strong> {{ $checklist->address }}</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-4" style="width: 40%">
                     <p><strong>Weather:</strong> {{ $checklist->weather }}</p>
                 </div>
-                <div class="col-md-4" style="width:60%;">
+                <div class="col-md-4" style="width:50%;">
                     <p><strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}</p>
                 </div>
             </div>
