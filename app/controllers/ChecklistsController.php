@@ -152,21 +152,29 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
+        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+            $q->where('cl_questions.pass', '=', false)
+                ->with('cl_question_template', 'question_images');
+        }))->findOrFail($id);
+
+        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+        $filename = sys_get_temp_dir().'/Kelvin Court Inspection Report ' . $checklist->id . '.pdf';
+        $pdf->save($filename);
+
         try {
-            $checklist = Checklist::with('client')->findOrFail($id);
-            Mail::send('emails.report', ['checklist' => $checklist], function($message) use ($id, $checklist)
+            Mail::send('emails.report', ['checklist' => $checklist], function($message) use ($id, $checklist, $filename)
             {
                 $message->from('info@kelvincourt.com.au', 'Kelvin Court');
 
                 $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
 
-                if(!empty($checklist->client->email_one)) {
-                    $message->to($checklist->client->email_one);
-                }
+                $message->to($checklist->client->email_one);
 
                 if(!empty($checklist->client->email_two)) {
                     $message->to($checklist->client->email_two);
                 }
+
+                $message->attach($filename);
             });
         } catch (Exception $e) {
             Log::error(print_r([$e->getFile(), $e->getLine(), $e->getCode(), $e->getMessage(), $e->getTraceAsString()],true));
