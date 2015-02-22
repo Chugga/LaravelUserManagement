@@ -25,10 +25,9 @@
 
     <div id="wrapper">
         @if(Auth::check())
-            @include('nav.navbar')
             @include('nav.sidebar')
-
         <div id="page-wrapper" class="white-bg">
+            @include('nav.navbar')
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-lg-12">
