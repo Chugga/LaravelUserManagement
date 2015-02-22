@@ -7,10 +7,8 @@ $config =  array(
         'enabled' => true,
         'binary' =>  base_path() . '/app/bin/wkhtmltopdf-linux',
         'options' => array(
-            'orientation' => 'Landscape',
+            'orientation' => 'portrait',
             'page-size' => 'A4',
-            'page-width' => 600,
-            'page-height' => 300
         )
     ),
     'image' => array(

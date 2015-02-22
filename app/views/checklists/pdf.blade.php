@@ -15,8 +15,10 @@
 
 @section('content')
     <div class="content" style="background-color: #2F4050; width:100%; margin:0;">
-        <div class="page-content white-bg" style="margin: 5px;">
-            <h1>Job Number {{ $checklist->job_number or 'N/A'}}</h1>
+        <div class="page-content white-bg" style="margin: 5px 5px; padding: 10px 10px;">
+            <h1>Kelvin Court Homes Inspection Report</h1>
+            <br /><br /><br />
+            <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
             <div class="row">
                 <div class="col-md-4" style="width: 40%;">
                     <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
