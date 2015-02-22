@@ -20,7 +20,7 @@
     <![endif]-->
 
 </head>
-<body style="background-attachment: fixed;">
+<body style="background-attachment: fixed; background-color:#fff;">
     @yield('content')
 {{-- Always load JS classes inside the bottom of the body --}}
 {{ Assets::js() }}
