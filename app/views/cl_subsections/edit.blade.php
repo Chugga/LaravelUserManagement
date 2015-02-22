@@ -35,7 +35,7 @@
                             <div class="col-md-2" style="visibility:hidden;">
                                 <div class="form-group">
                                     {{ Form::label("question[$question->id][photo]", 'Upload Image') }}
-                                    {{ Form::file("question[$question->id][photo]", array('accept' => "image/*;capture=camera", 'class' => 'form-control', 'multiple')) }}
+                                    {{ Form::file("question[$question->id][photo]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
                                 </div>
                             </div>
                         @else
@@ -79,8 +79,8 @@
                 }
             });
 
-            $("#photo-upload").on('change', function() {
-                $(this).parent().parent().append('<br />').append($(this).parent().clone());
+            $(".photo-upload").on('change', function() {
+                $(this).parent().parent().append($(this).parent().clone());
             });
         });
     </script>
