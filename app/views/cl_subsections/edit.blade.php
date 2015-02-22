@@ -69,7 +69,9 @@
                 useCurrent: true
             });
 
-            $(".pass-checkbox").on('change', function() {
+            var body = $("body");
+
+            body.on('change', '.pass-checkbox', function() {
                 if($(this).prop('checked')) {
                     $(this).parent().parent().parent().children().eq(1).css('visibility', 'hidden');
                     $(this).parent().parent().parent().children().eq(2).css('visibility', 'hidden');
@@ -79,7 +81,7 @@
                 }
             });
 
-            $(".photo-upload").on('change', function() {
+            body.on('change', '.photo-upload',function() {
                 $(this).parent().parent().append($(this).parent().clone());
             });
         });
