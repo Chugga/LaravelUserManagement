@@ -70,11 +70,11 @@
 
             $(".pass-checkbox").on('change', function() {
                 if($(this).prop('checked')) {
+                    $(this).parent().parent().parent().children().eq(1).css('visibility', 'hidden');
                     $(this).parent().parent().parent().children().eq(2).css('visibility', 'hidden');
-                    $(this).parent().parent().parent().children().eq(3).css('visibility', 'hidden');
                 } else {
+                    $(this).parent().parent().parent().children().eq(1).css('visibility', 'visible');
                     $(this).parent().parent().parent().children().eq(2).css('visibility', 'visible');
-                    $(this).parent().parent().parent().children().eq(3).css('visibility', 'visible');
                 }
             });
         });
