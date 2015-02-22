@@ -61,10 +61,12 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+                                                <br />
                                             @endif
                                         @endforeach
                                     </div>
                                 </div>
+                                <hr /><br />
                             @endif
                         @endforeach
                     </div>
