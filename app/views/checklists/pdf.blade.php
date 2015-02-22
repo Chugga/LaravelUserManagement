@@ -1,6 +1,11 @@
 @extends('layouts.pdf')
 
 @section('stylesheets')
+    <link href="http://inspect.kelvincourt.com.au/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="http://inspect.kelvincourt.com.au/assets/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+    <link href="http://inspect.kelvincourt.com.au/assets/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="http://inspect.kelvincourt.com.au/assets/css/animate.css" type="text/css" rel="stylesheet">
+    <link href="http://inspect.kelvincourt.com.au/assets/css/style.min.css" type="text/css" rel="stylesheet">
     <style>
         .align-right {
             float:right;
@@ -51,7 +56,7 @@
                                                 <div class="col-md-12">
                                                     @foreach($question->question_images as $image)
                                                         <div class="col-md-6">
-                                                            <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
+                                                            <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:100%" />
                                                         </div>
                                                     @endforeach
                                                 </div>
