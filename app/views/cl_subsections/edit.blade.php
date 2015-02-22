@@ -22,21 +22,36 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 {{ Form::label("question[$question->id][pass]", 'Passed') }}
-                                {{ Form::checkbox("question[$question->id][pass]", 1, $question->pass, array('class')) }}
+                                {{ Form::checkbox("question[$question->id][pass]", 1, $question->pass, array('class' => 'pass-checkbox')) }}
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                {{ Form::label("question[$question->id][answer]", 'Comments') }}
-                                {{ Form::textarea("question[$question->id][answer]", $question->answer, array('id' => "question[$question->id][answer]", 'class' => 'form-control', 'rows' => '2', 'cols' => 50)) }}
+                        @if($question->pass)
+                            <div class="col-md-8" style="visibility:hidden;">
+                                <div class="form-group">
+                                    {{ Form::label("question[$question->id][answer]", 'Comments') }}
+                                    {{ Form::textarea("question[$question->id][answer]", $question->answer, array('id' => "question[$question->id][answer]", 'class' => 'form-control', 'rows' => '2', 'cols' => 50)) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {{ Form::label("question[$question->id][photo]", 'Upload Image') }}
-                                {{ Form::file("question[$question->id][photo]", array('accept' => "image/*;capture=camera", 'class' => 'form-control', 'multiple')) }}
+                            <div class="col-md-2" style="visibility:hidden;">
+                                <div class="form-group">
+                                    {{ Form::label("question[$question->id][photo]", 'Upload Image') }}
+                                    {{ Form::file("question[$question->id][photo]", array('accept' => "image/*;capture=camera", 'class' => 'form-control', 'multiple')) }}
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    {{ Form::label("question[$question->id][answer]", 'Comments') }}
+                                    {{ Form::textarea("question[$question->id][answer]", $question->answer, array('id' => "question[$question->id][answer]", 'class' => 'form-control', 'rows' => '2', 'cols' => 50)) }}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {{ Form::label("question[$question->id][photo]", 'Upload Image') }}
+                                    {{ Form::file("question[$question->id][photo]", array('accept' => "image/*;capture=camera", 'class' => 'form-control', 'multiple')) }}
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -51,6 +66,16 @@
         $(document).ready(function(){
             $('#datetimepicker1').datetimepicker({
                 useCurrent: true
+            });
+
+            $(".pass-checkbox").on('change', function() {
+                if($(this).prop('checked')) {
+                    $(this).parent().parent().parent().children().eq(2).css('visibility', 'hidden');
+                    $(this).parent().parent().parent().children().eq(3).css('visibility', 'hidden');
+                } else {
+                    $(this).parent().parent().parent().children().eq(2).css('visibility', 'visible');
+                    $(this).parent().parent().parent().children().eq(3).css('visibility', 'visible');
+                }
             });
         });
     </script>
