@@ -2,7 +2,6 @@
 
 @section('stylesheets')
     <link href="http://inspect.kelvincourt.com.au/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="http://inspect.kelvincourt.com.au/assets/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
     <link href="http://inspect.kelvincourt.com.au/assets/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <link href="http://inspect.kelvincourt.com.au/assets/css/animate.css" type="text/css" rel="stylesheet">
     <link href="http://inspect.kelvincourt.com.au/assets/css/style.min.css" type="text/css" rel="stylesheet">
@@ -15,8 +14,8 @@
 @stop
 
 @section('content')
-    <div class="content" style="background-color:#fff; width:100%; margin:0;">
-        <div class="page-content white-bg" style="margin: 0;">
+    <div class="content" style="background-color: #2F4050; width:100%; margin:0;">
+        <div class="page-content white-bg" style="margin: 5px;">
             <h1>Job Number {{ $checklist->job_number or 'N/A'}}</h1>
             <div class="row">
                 <div class="col-md-4">

@@ -69,7 +69,6 @@ return array(
             'plugins/metisMenu/jquery.metisMenu.js',
             'inspinia.js',
 			'bootstrap.min.css',
-			'bootstrap-theme.min.css',
 			'bootstrap.min.js',
             'font-awesome.min.css',
             'animate.css',

@@ -159,6 +159,10 @@ class ChecklistsController extends \BaseController {
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
         $filename = sys_get_temp_dir().'/Kelvin Court Inspection Report ' . $checklist->id . '.pdf';
+
+        if(file_exists($filename)) {
+            unlink($filename);
+        }
         $pdf->save($filename);
 
         try {
