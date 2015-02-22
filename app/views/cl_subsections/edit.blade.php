@@ -57,7 +57,19 @@
                 </div>
             </div>
         @endforeach
-        {{ Form::submit('Save and Next', array('class' => 'btn btn-success pull-right')) }}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    {{ Form::label("comments", 'Notes') }}
+                    {{ Form::textarea("comments", $cl_subsection->comments, array('id' => "comments", 'class' => 'form-control', 'rows' => '2', 'cols' => 50)) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ Form::submit('Save and Next', array('class' => 'btn btn-success pull-right')) }}
+            </div>
+        </div>
         {{ Form::close() }}
     </div>
 @stop
