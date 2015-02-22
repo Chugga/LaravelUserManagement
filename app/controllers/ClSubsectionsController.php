@@ -106,6 +106,11 @@ class ClSubsectionsController extends \BaseController {
         echo "</pre>";
         exit;*/
 
+        if(Input::has('comments')) {
+            $clsubsection->comments = Input::get('comments');
+            $clsubsection->save();
+        }
+
         foreach($questions as $id => $question) {
             $question_mod = ClQuestion::find($id);
             $question_mod->pass = isset($question['pass']);
