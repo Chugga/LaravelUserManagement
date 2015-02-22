@@ -21,8 +21,6 @@
 
 </head>
 <body style="background-attachment: fixed;">
-
-
     <div id="wrapper">
         @if(Auth::check())
             @include('nav.sidebar')

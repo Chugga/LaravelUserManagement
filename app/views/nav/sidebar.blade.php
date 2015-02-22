@@ -21,7 +21,7 @@
                                 @foreach($item['links'] as $link)
                                     @if($link['privilege'] <= Auth::user()->privilege)
                                         <li class="{{Route::currentRouteName() == $link['route_name'] ? 'active' : ''}}">
-                                            <a href="{{URL::route($link['route_name'])}}" style="background-color:#2F4050;"><span class="nav-label"><i class="fa {{ $link['icon'] }}"></i>{{ $link['display'] }}</span></a>
+                                            <a href="{{URL::route($link['route_name'])}}" style="background-color:#2F4050;"><i class="fa {{ $link['icon'] }}"></i><span class="nav-label">{{ $link['display'] }}</span></a>
                                         </li>
                                     @endif
                                 @endforeach
