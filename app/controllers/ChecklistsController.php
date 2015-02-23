@@ -158,7 +158,9 @@ class ChecklistsController extends \BaseController {
         }))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
-        $pdf->setOption('footer-center', 'Page [page]');
+
+        $pdf->setOption('footer-center', 'Page [page] of [toPage]');
+
         $filename = sys_get_temp_dir().'/Kelvin Court Inspection Report ' . $checklist->id . '.pdf';
 
         if(file_exists($filename)) {

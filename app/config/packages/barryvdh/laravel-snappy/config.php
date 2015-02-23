@@ -9,6 +9,7 @@ $config =  array(
         'options' => array(
             'orientation' => 'portrait',
             'page-size' => 'A4',
+            'footer-center' => 'Page [page] of [toPage]'
         )
     ),
     'image' => array(
