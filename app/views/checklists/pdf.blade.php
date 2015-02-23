@@ -24,7 +24,7 @@
 @section('content')
     <div class="content" style="background-color: #fff; width:100%; margin:0;">
         <div class="page-content white-bg" style="margin: 0; padding: 10px 10px;">
-            <div class="end-page" style="border:10px solid #2F4050;">
+            <div class="end-page" style="border:5px solid #2F4050; padding: 20px; height: 297mm;">
                 <h1>Kelvin Court Homes Inspection Report</h1>
                 <br /><br /><br />
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
@@ -78,7 +78,6 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <hr /><br />
                             @endif
                         @endforeach
                     </div>
