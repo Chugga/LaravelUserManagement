@@ -90,6 +90,20 @@
                     </div>
                 </div>
             @endforeach
+            <div class="row">
+                <div class="col-md-12" style="text-align:center">
+                    <h3>Terms and Conditions</h3>
+                    <p>
+                        The purpose and intent of this inspection and report is to provide the 'client' with an opinion and list of defects (if any)
+                        on the quality of the finishes and fixtures as viewed at the property on the day the inspection occurred, based on best practice
+                        building methods, BCA and relevant standards and tolerances. This report has been produced on the basis that no person or persons
+                        using the information in part or whole contained within shall have any claim against Kelvin Court Pty Ltd or its representatives.
+                        It does not comment or take into account the structural integrity accuracy or compliance with any formal documentation including
+                        final working drawings, permit approvals, statutory, regulatory or legislation requirements, colour selections, manufacturers
+                        installation guidelines or requirements.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 @stop
