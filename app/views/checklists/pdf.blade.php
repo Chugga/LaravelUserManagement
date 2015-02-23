@@ -18,15 +18,22 @@
         .end-page {
             page-break-after: always;
         }
+
+        .front-page {
+            border:5px solid #2F4050;
+            padding: 20px;
+            height: 250mm;
+            text-align:center;
+        }
     </style>
 @stop
 
 @section('content')
     <div class="content" style="background-color: #fff; width:100%; margin:0;">
         <div class="page-content white-bg" style="margin: 0; padding: 10px 10px;">
-            <div class="end-page" style="border:5px solid #2F4050; padding: 20px; height: 297mm;">
+            <div class="end-page front-page" style="padding-top: 100mm;">
                 <h1>Kelvin Court Homes Inspection Report</h1>
-                <br /><br /><br />
+                <br />
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
                 <div class="row">
                     <div class="col-md-4" style="width: 40%;">
