@@ -147,7 +147,7 @@ class ChecklistsController extends \BaseController {
                 ->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
-        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
         return $pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf');
     }
 
