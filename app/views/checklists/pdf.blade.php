@@ -36,17 +36,17 @@
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
                 <br />
                 <div style="width: 50%;">
-                    <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
+                    <strong>Client:</strong> {{ $checklist->client->name }}
                 </div>
                 <div style="width:50%;">
-                    <p><strong>Address:</strong> {{ $checklist->address }}</p>
+                    <strong>Address:</strong> {{ $checklist->address }}
                 </div>
                 <br />
                 <div style="width: 50%">
-                    <p><strong>Weather:</strong> {{ $checklist->weather }}</p>
+                    <strong>Weather:</strong> {{ $checklist->weather }}
                 </div>
                 <div style="width:50%;">
-                    <p><strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}</p>
+                    <strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}
                 </div>
             </div>
             @foreach($checklist->cl_sections as $section)
