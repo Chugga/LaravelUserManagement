@@ -102,7 +102,7 @@ class ClSubsectionsController extends \BaseController {
 
         $questions = [];
 
-        if(Input::has('questions')) {
+        if(Input::has('question')) {
             $questions = Input::all()['question'];
         }
 
