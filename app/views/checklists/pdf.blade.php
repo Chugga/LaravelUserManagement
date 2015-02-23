@@ -35,21 +35,18 @@
                 <h1>Kelvin Court QA Inspections</h1>
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
                 <br />
-                <div class="row">
-                    <div style="width: 50%;">
-                        <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
-                    </div>
-                    <div style="width:50%;">
-                        <p><strong>Address:</strong> {{ $checklist->address }}</p>
-                    </div>
+                <div style="width: 50%;">
+                    <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
                 </div>
-                <div class="row">
-                    <div style="width: 50%">
-                        <p><strong>Weather:</strong> {{ $checklist->weather }}</p>
-                    </div>
-                    <div style="width:50%;">
-                        <p><strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}</p>
-                    </div>
+                <div style="width:50%;">
+                    <p><strong>Address:</strong> {{ $checklist->address }}</p>
+                </div>
+                <br />
+                <div style="width: 50%">
+                    <p><strong>Weather:</strong> {{ $checklist->weather }}</p>
+                </div>
+                <div style="width:50%;">
+                    <p><strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}</p>
                 </div>
             </div>
             @foreach($checklist->cl_sections as $section)
