@@ -38,27 +38,28 @@
                 <table style="width:100% border: 0;">
                     <thead></thead>
                     <tbody>
-                        <tr>
-                            <td style="width:50%">
-                                <strong>Client:</strong> {{ $checklist->client->name }}
-                            </td>
-                            <td style="width:50%">
-                                <strong>Address:</strong> {{ $checklist->address }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width:50%">
-                                <strong>Weather:</strong> {{ $checklist->weather }}
-                            </td>
-                            <td style="width:50%">
-                                <strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}
-                            </td>
-                        </tr>
+                    <tr>
+                        <td style="width:50%">
+                            <strong>Client:</strong> {{ $checklist->client->name }}
+                        </td>
+                        <td style="width:50%">
+                            <strong>Address:</strong> {{ $checklist->address }}
+                        </td>
+                    </tr>
+                    <tr style="height: 10px;"><td></td><td></td></tr>
+                    <tr>
+                        <td style="width:50%">
+                            <strong>Weather:</strong> {{ $checklist->weather }}
+                        </td>
+                        <td style="width:50%">
+                            <strong>Conducted at:</strong> {{ $checklist->conducted_at->toDayDateTimeString() }}
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
             @foreach($checklist->cl_sections as $section)
-                <div class="row end-page">
+                <div class="row end-page" style="text-align:center;">
                     <div class="col-md-12">
                         <h2>{{ $section->cl_section_template->name }} {{ $section->cl_section_template->subsection_titles }}</h2>
                         @foreach($section->cl_subsections as $subsection)
