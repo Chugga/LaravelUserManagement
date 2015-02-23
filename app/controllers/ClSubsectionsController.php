@@ -99,12 +99,12 @@ class ClSubsectionsController extends \BaseController {
 	public function update($id)
 	{
 		$clsubsection = ClSubsection::with('cl_section.checklist')->findOrFail($id);
-        $questions = Input::all()['question'];
 
-        /*echo "<pre>";
-        print_r(Input::all());
-        echo "</pre>";
-        exit;*/
+        $questions = [];
+
+        if(Input::has('questions')) {
+            $questions = Input::all()['question'];
+        }
 
         if(Input::has('comments')) {
             $clsubsection->comments = Input::get('comments');
@@ -128,6 +128,7 @@ class ClSubsectionsController extends \BaseController {
                 }
             }
         }
+
         $next_subsection = ClSubsection::whereSubsectionNumber($clsubsection->subsection_number+1)->whereHas('cl_section', function($q) use ($clsubsection) {
             $q->whereHas('checklist', function($q) use ($clsubsection) {
                 $q->whereId($clsubsection->cl_section->checklist->id);
