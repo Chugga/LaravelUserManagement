@@ -19,7 +19,7 @@ class CreateChecklistImageTable extends Migration {
             $table->integer('checklist_id')->unsigned();
             $table->string('filename');
 
-            $table->foreign('checklist_id')->references('id')->on('checklist');
+            $table->foreign('checklist_id')->references('id')->on('checklists');
 		});
 	}
 
