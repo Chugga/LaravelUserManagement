@@ -41,7 +41,7 @@
                 <br />
                 <h1>Kelvin Court QA Inspections</h1>
                 @if(count($checklist->checklist_images) > 0)
-                    <img src="{{ Request::root() }}/photos/{{ $checklist->checklist_images[0]->filename }}" style="max-height:100mm;" />
+                    <img src="{{ Request::root() }}/photos/{{ $checklist->checklist_images[0]->filename }}" style="max-height:100mm; max-width:90%;" />
                 @endif
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
                 <br />
