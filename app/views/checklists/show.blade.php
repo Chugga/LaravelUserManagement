@@ -18,6 +18,13 @@
     <div class="content">
         <h1>Job Number {{ $checklist->job_number or 'N/A'}}</h1>
         <div class="row">
+            <div class="col-md-12">
+                @if(count($checklist->checklist_images) > 0)
+                    <img src="{{ Request::root() }}/photos/{{ $checklist->checklist_images[0]->filename }}" style=" max-width:90%;" />
+                @endif
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <p><strong>Client:</strong> {{ $checklist->client->name }}</p>
             </div>
