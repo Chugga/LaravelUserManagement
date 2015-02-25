@@ -55,6 +55,14 @@
             </div>
             {{ Form::hidden('checklist_template_id', $checklist_template->id) }}
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ Form::label("photo", 'Upload Cover Image') }}
+                    {{ Form::file("photo", array('accept' => "image/*;capture=camera", 'class' => 'form-control', 'multiple', 'required')) }}
+                </div>
+            </div>
+        </div>
         @foreach($checklist_template->cl_section_templates as $section_template)
             <div class="row">
                 <div class="col-md-12">

@@ -40,6 +40,10 @@
                     {{ Form::email('email', null, array('id' => 'emailAddress', 'class' => 'form-control')) }}
                 </div>
                 <div class="form-group">
+                    {{ Form::label('phoneNumber', 'Phone Number') }}
+                    {{ Form::text('phone_number', null, array('id' => 'phoneNumber', 'class' => 'form-control')) }}
+                </div>
+                <div class="form-group">
                     {{ Form::label('privilege', 'Privilege Level') }}
                     {{ Form::number('privilege', null, array('id' => 'privilege', 'class' => 'form-control', 'step' => 1, 'min' => 0, 'max' => 10)) }}
                 </div>

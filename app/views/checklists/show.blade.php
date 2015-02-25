@@ -38,36 +38,32 @@
                 <div class="col-md-12">
                     <h2>{{ $section->cl_section_template->name }} {{ $section->cl_section_template->subsection_titles }}</h2>
                     @foreach($section->cl_subsections as $subsection)
-                        @if(count($subsection->cl_questions) > 0 || strlen($subsection->comments) > 0)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>{{ $subsection->cl_subsection_template->name }}</h4>
-                                    @if(strlen($subsection->comments) > 0)
-                                        <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
-                                    @endif
-                                    @foreach($subsection->cl_questions as $question)
-                                        @if(!$question->pass)
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }} : </strong>{{ $question->answer }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>{{ $subsection->cl_subsection_template->name }}</h4>
+                                @if(strlen($subsection->comments) > 0)
+                                    <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
+                                @endif
+                                @foreach($subsection->cl_questions as $question)
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }} : </strong>{{ $question->pass ? "Passed" : $question->answer }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @foreach($question->question_images as $image)
+                                                <div class="col-md-6">
+                                                    <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @foreach($question->question_images as $image)
-                                                        <div class="col-md-6">
-                                                            <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <br />
-                                        @endif
-                                    @endforeach
-                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <br />
+                                @endforeach
                             </div>
-                            <hr /><br />
-                        @endif
+                        </div>
+                        <hr /><br />
                     @endforeach
                 </div>
             </div>

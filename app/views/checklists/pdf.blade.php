@@ -31,8 +31,18 @@
 @section('content')
     <div class="content" style="background-color: #fff; width:100%; margin:0;">
         <div class="page-content white-bg" style="margin: 0; padding: 10px 10px;">
-            <div class="end-page front-page" style="padding-top: 80mm;">
+            <div class="end-page front-page" style="padding-top: 10mm;">
+                <div style="float:right;">
+                    <p><strong>Inspector:</strong> {{ $checklist->user->first_name }} {{ $checklist->user->last_name }}</p>
+                    <p><strong>Phone Number:</strong> {{ $checklist->user->phone_number }}</p>
+                    <p><strong>Email Address:</strong> {{ $checklist->user->email }}</p>
+                </div>
+                <div style="clear:both;"></div>
+                <br />
                 <h1>Kelvin Court QA Inspections</h1>
+                @if(count($checklist->checklist_images) > 0)
+                    <img src="{{ Request::root() }}/photos/{{ $checklist->checklist_images[0]->filename }}" style="max-height:100mm;" />
+                @endif
                 <h2>Job Number {{ $checklist->job_number or 'N/A'}}</h2>
                 <br />
                 <table style="width:100% border: 0;">
@@ -63,36 +73,34 @@
                     <div class="col-md-12">
                         <h2>{{ $section->cl_section_template->name }} {{ $section->cl_section_template->subsection_titles }}</h2>
                         @foreach($section->cl_subsections as $subsection)
-                            @if(count($subsection->cl_questions) > 0 || strlen($subsection->comments) > 0)
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }}@endif</h4>
-                                        @if(strlen($subsection->comments) > 0)
-                                            <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
-                                        @endif
-                                        @foreach($subsection->cl_questions as $question)
-                                            @if(!$question->pass)
-                                                <div class="together">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->answer }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            @foreach($question->question_images as $image)
-                                                                    <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
-                                                            @endforeach
-                                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }}@endif</h4>
+                                    @if(strlen($subsection->comments) > 0)
+                                        <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
+                                    @endif
+                                    @foreach($subsection->cl_questions as $question)
+                                        @if(!$question->pass)
+                                            <div class="together">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->pass ? "Passed" : $question->answer }}</p>
                                                     </div>
                                                 </div>
-                                                <br />
-                                            @endif
-                                        @endforeach
-                                    </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @foreach($question->question_images as $image)
+                                                                <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                        @endif
+                                    @endforeach
                                 </div>
-                                <hr /><br />
-                            @endif
+                            </div>
+                            <hr /><br />
                         @endforeach
                     </div>
                 </div>

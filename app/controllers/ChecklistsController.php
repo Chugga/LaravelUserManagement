@@ -56,6 +56,13 @@ class ChecklistsController extends \BaseController {
             'user_id' => Auth::user()->id
         ]);
 
+        if(isset($inputs['photo'])) {
+            $image = ChecklistImage::create(array('checklist_id' => $checklist->id));
+            $image->filename = "checklist-" . $image->id . "." . $inputs['photo']->getClientOriginalExtension();
+            $image->save();
+            $inputs['photo']->move($_SERVER['DOCUMENT_ROOT'] . '/photos', "checklist-" . $image->id . "." . $inputs['photo']->getClientOriginalExtension());
+        }
+
         $section_number = 0;
         $subsection_number = 0;
         $subsection = null;
@@ -84,8 +91,7 @@ class ChecklistsController extends \BaseController {
 	{
         Assets::add('theme');
 		$checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
-            $q->where('cl_questions.pass', '=', false)
-                ->with('cl_question_template', 'question_images');
+                $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 		return View::make('checklists.show')
             ->with('checklist', $checklist)
@@ -142,9 +148,8 @@ class ChecklistsController extends \BaseController {
 	}
 
     public function getPDF($id) {
-        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
-            $q->where('cl_questions.pass', '=', false)
-                ->with('cl_question_template', 'question_images');
+        $checklist = Checklist::with(array('client', 'user', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+            $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
@@ -152,20 +157,18 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
-        $checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
-            $q->where('cl_questions.pass', '=', false)
-                ->with('cl_question_template', 'question_images');
+        $checklist = Checklist::with(array('client', 'user', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+                $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
-
-        $pdf->setOption('footer-center', 'Page [page] of [toPage]');
 
         $filename = sys_get_temp_dir().'/Kelvin Court Inspection Report ' . $checklist->id . '.pdf';
 
         if(file_exists($filename)) {
             unlink($filename);
         }
+
         $pdf->save($filename);
 
         try {

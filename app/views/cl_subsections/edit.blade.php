@@ -50,7 +50,6 @@
                                     {{ Form::label("question[$question->id][photo][]", 'Upload Image') }}
                                     {{ Form::file("question[$question->id][photo][]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
                                 </div>
-
                             </div>
                         @endif
                     </div>

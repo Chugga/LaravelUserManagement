@@ -20,6 +20,10 @@ class Checklist extends \Eloquent {
         return $this->hasMany('ClSection');
     }
 
+    public function checklist_images() {
+        return $this->hasMany('ChecklistImage');
+    }
+
     public function client() {
         return $this->belongsTo('Client');
     }
