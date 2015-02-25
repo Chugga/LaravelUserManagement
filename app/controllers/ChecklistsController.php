@@ -90,7 +90,7 @@ class ChecklistsController extends \BaseController {
 	public function show($id)
 	{
         Assets::add('theme');
-		$checklist = Checklist::with(array('client', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+		$checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 		return View::make('checklists.show')
@@ -148,7 +148,7 @@ class ChecklistsController extends \BaseController {
 	}
 
     public function getPDF($id) {
-        $checklist = Checklist::with(array('client', 'user', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
             $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
@@ -157,7 +157,7 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
-        $checklist = Checklist::with(array('client', 'user', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
