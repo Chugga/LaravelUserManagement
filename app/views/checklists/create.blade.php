@@ -17,7 +17,7 @@
 @section('content')
     <div class="content">
         <h1>Create new Checklist</h1>
-        {{ Form::open(array('route' => 'checklists.store', 'method' => 'post', 'class' => '')) }}
+        {{ Form::open(array('route' => 'checklists.store', 'method' => 'post', 'class' => '', 'files' => true)) }}
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">

@@ -32,7 +32,7 @@
     <div class="content" style="background-color: #fff; width:100%; margin:0;">
         <div class="page-content white-bg" style="margin: 0; padding: 10px 10px;">
             <div class="end-page front-page" style="padding-top: 10mm;">
-                <div style="float:right;">
+                <div style="float:right; text-align: right;">
                     <p><strong>Inspector:</strong> {{ $checklist->user->first_name }} {{ $checklist->user->last_name }}</p>
                     <p><strong>Phone Number:</strong> {{ $checklist->user->phone_number }}</p>
                     <p><strong>Email Address:</strong> {{ $checklist->user->email }}</p>
