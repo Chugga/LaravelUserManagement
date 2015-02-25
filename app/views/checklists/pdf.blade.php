@@ -80,23 +80,21 @@
                                         <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
                                     @endif
                                     @foreach($subsection->cl_questions as $question)
-                                        @if(!$question->pass)
-                                            <div class="together">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->pass ? "Passed" : $question->answer }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        @foreach($question->question_images as $image)
-                                                                <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
-                                                        @endforeach
-                                                    </div>
+                                        <div class="together">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->pass ? "Passed" : $question->answer }}</p>
                                                 </div>
                                             </div>
-                                            <br />
-                                        @endif
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @foreach($question->question_images as $image)
+                                                            <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
                                     @endforeach
                                 </div>
                             </div>
