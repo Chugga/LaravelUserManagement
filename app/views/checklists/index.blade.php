@@ -40,9 +40,11 @@
                     <td>{{$checklist->client->name or ''}}</td>
                     <td>{{$checklist->address or ''}}</td>
                     <td>
-                        <a href="{{ URL::route('checklists.show', array($checklist->id)) }}" class="btn btn-success">Show</a>
-                        @if(count($checklist->cl_sections[0]->cl_subsections) > 0)
+                        @if(count($checklist->cl_sections) > 0 && count($checklist->cl_sections[0]->cl_subsections) > 0)
+                            <a href="{{ URL::route('checklists.show', array($checklist->id)) }}" class="btn btn-success">Show</a>
                             <a href="{{ URL::route('clsubsections.edit', array($checklist->cl_sections[0]->cl_subsections[0]->id)) }}" class="btn btn-primary">Edit</a>
+                        @else
+                            <p>No sections or subsections in checklist.</p>
                         @endif
                     </td>
                 </tr>
