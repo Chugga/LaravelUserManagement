@@ -75,7 +75,7 @@
                         @foreach($section->cl_subsections as $subsection)
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }}@endif</h4>
+                                    <h3>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }}@endif</h3>
                                     @if(strlen($subsection->comments) > 0)
                                         <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
                                     @endif
@@ -89,7 +89,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     @foreach($question->question_images as $image)
-                                                            <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:5%; margin-right:5%" />
+                                                            <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:40%; margin-left:4%; margin-right:4%" />
                                                     @endforeach
                                                 </div>
                                             </div>

@@ -95,7 +95,8 @@ class ChecklistsController extends \BaseController {
         }))->findOrFail($id);
 		return View::make('checklists.show')
             ->with('checklist', $checklist)
-            ->with('i', 1);
+            ->with('i', 1)
+            ->with('bedroom', 1);
 	}
 
 	/**
@@ -161,7 +162,7 @@ class ChecklistsController extends \BaseController {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
-        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1]);
+        $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
 
         $filename = sys_get_temp_dir().'/Kelvin Court Inspection Report ' . $checklist->id . '.pdf';
 
