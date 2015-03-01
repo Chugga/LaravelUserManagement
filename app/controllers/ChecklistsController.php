@@ -94,19 +94,6 @@ class ChecklistsController extends \BaseController {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
-        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/photos';
-
-        foreach(scandir($filepath) as $filename) {
-            Image::make("$filepath/$filename")
-                ->widen(1080, function ($constraint) {
-                    $constraint->upsize();
-                })
-                ->heighten(1080, function ($constraint) {
-                    $constraint->upsize();
-                })
-                ->save();
-        }
-
 		return View::make('checklists.show')
             ->with('checklist', $checklist)
             ->with('i', 1)
