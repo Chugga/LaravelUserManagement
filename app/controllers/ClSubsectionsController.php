@@ -123,7 +123,17 @@ class ClSubsectionsController extends \BaseController {
                         $image = QuestionImage::create(array('cl_question_id' => $id));
                         $image->filename = $image->id . "." . $photo->getClientOriginalExtension();
                         $image->save();
-                        $photo->move($_SERVER['DOCUMENT_ROOT'] . '/photos', $image->id . "." . $photo->getClientOriginalExtension());
+                        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/photos';
+                        $filename =  $image->id . "." . $photo->getClientOriginalExtension();
+                        $photo->move($filepath, $filename);
+                        Image::make("$filepath/$filename")
+                            ->widen(1080, function ($constraint) {
+                                $constraint->upsize();
+                            })
+                            ->heighten(1080, function ($constraint) {
+                                $constraint->upsize();
+                            })
+                            ->save();
                     }
                 }
             }
@@ -134,6 +144,7 @@ class ClSubsectionsController extends \BaseController {
                 $q->whereId($clsubsection->cl_section->checklist->id);
             });
         })->first();
+
         if(isset($next_subsection)) {
             return Redirect::route('clsubsections.edit', $next_subsection->id);
         } else {

@@ -125,6 +125,7 @@ return array(
         'Stolz\Assets\ManagerServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
         'Barryvdh\Snappy\ServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
 	),
 
 	/*
@@ -192,8 +193,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
         'PDF'               => 'Barryvdh\Snappy\Facades\SnappyPdf',
-        'Image'             => 'Barryvdh\Snappy\Facades\SnappyImage',
-
+        'Image'             => 'Intervention\Image\Facades\Image'
 	),
 
 );
