@@ -60,9 +60,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             @foreach($question->question_images as $image)
-                                                <div class="col-md-6">
-                                                    <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
-                                                </div>
+                                                @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/' . $image->filename))
+                                                    <div class="col-md-6">
+                                                        <img src="/photos/{{ $image->filename }}" style="max-width:100%" />
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>

@@ -89,7 +89,9 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     @foreach($question->question_images as $image)
+                                                        @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/' . $image->filename))
                                                             <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:46%; margin-left:1%; margin-right:1%" />
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
