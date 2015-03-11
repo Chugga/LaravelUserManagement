@@ -47,7 +47,9 @@ class ClientsController extends \BaseController {
 		$client = Client::create($data);
 
         foreach($emails as $email) {
-            ClientEmailAddress::create(['client_id' => $client->id, 'email' => $email]);
+            if(!empty($email)) {
+                ClientEmailAddress::create(['client_id' => $client->id, 'email' => $email]);
+            }
         }
 
 		return Redirect::route('clients.index');
@@ -110,7 +112,9 @@ class ClientsController extends \BaseController {
 		$client->update($data);
 
         foreach($emails as $email) {
-            ClientEmailAddress::create(['client_id' => $id, 'email' => $email]);
+            if(!empty($email)) {
+                ClientEmailAddress::create(['client_id' => $id, 'email' => $email]);
+            }
         }
 
 		return Redirect::route('clients.index');

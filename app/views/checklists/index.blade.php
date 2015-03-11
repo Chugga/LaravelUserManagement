@@ -22,7 +22,7 @@
         </div>
         <br />
         <br />
-        <table id="datatable" class="table table-bordered table-responsive">
+        <table id="datatable" class="table table-bordered table-responsive" data-order='[[ 2, "desc" ]]'>
             <thead>
             <tr>
                 <th class="col-md-1">Job Number</th>
