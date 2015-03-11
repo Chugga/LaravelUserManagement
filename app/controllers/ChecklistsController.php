@@ -18,7 +18,7 @@ class ChecklistsController extends \BaseController {
             })->with(array('cl_subsections' => function($q) {
                 $q->whereSubsectionNumber(0);
             }));
-        }))->get();
+        }))->orderBy('id', 'desc')->get();
 
 		return View::make('checklists.index')
             ->with('checklists', $checklists);

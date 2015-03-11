@@ -25,29 +25,29 @@
         <table id="datatable" class="table table-bordered table-responsive">
             <thead>
             <tr>
-                <th class="col-md-2">Job Number</th>
-                <th class="col-md-2">User</th>
+                <th class="col-md-1">Job Number</th>
+                <th class="col-md-2">Date Conducted</th>
+                <th class="col-md-1">User</th>
                 <th class="col-md-2">Client</th>
-                <th class="col-md-4">Address</th>
+                <th class="col-md-2">Address</th>
                 <th class="col-md-2">Open</th>
             </tr>
             </thead>
             <tbody>
             @foreach($checklists as $checklist)
-                <tr>
-                    <td>{{$checklist->job_number or ''}}</td>
-                    <td>{{$checklist->user->first_name . " " . $checklist->user->last_name}}</td>
-                    <td>{{$checklist->client->name or ''}}</td>
-                    <td>{{$checklist->address or ''}}</td>
-                    <td>
-                        @if(count($checklist->cl_sections) > 0 && count($checklist->cl_sections[0]->cl_subsections) > 0)
+                @if(count($checklist->cl_sections) > 0 && count($checklist->cl_sections[0]->cl_subsections) > 0)
+                    <tr>
+                        <td>{{$checklist->job_number or ''}}</td>
+                        <td>{{$checklist->conducted_at or ''}}</td>
+                        <td>{{$checklist->user->first_name . " " . $checklist->user->last_name}}</td>
+                        <td>{{$checklist->client->name or ''}}</td>
+                        <td>{{$checklist->address or ''}}</td>
+                        <td>
                             <a href="{{ URL::route('checklists.show', array($checklist->id)) }}" class="btn btn-success">Show</a>
                             <a href="{{ URL::route('clsubsections.edit', array($checklist->cl_sections[0]->cl_subsections[0]->id)) }}" class="btn btn-primary">Edit</a>
-                        @else
-                            <p>No sections or subsections in checklist.</p>
-                        @endif
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
         </table>
