@@ -22,7 +22,7 @@
         </div>
         <br />
         <br />
-        <table id="datatable" class="table table-bordered table-responsive" data-order='[[ 2, "desc" ]]'>
+        <table id="datatable" class="table table-bordered table-responsive">
             <thead>
             <tr>
                 <th class="col-md-1">Job Number</th>
@@ -57,7 +57,10 @@
 @section('javascripts')
     <script>
         $(document).ready(function() {
-            $('#datatable').dataTable({responsive: true, paging: false});
+            $('#datatable').dataTable({
+                responsive: true,
+                order: [ 1, 'desc' ]
+            });
         });
     </script>
 @stop

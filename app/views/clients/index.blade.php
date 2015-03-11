@@ -33,7 +33,6 @@
                     @foreach($clients as $client)
                         <tr>
                             <td>{{ $client->name }}</td>
-                            <td>{{ $client->email_one }}</td>
                             <td>
                                 @if(isset($client->client_email_addresses[0]))
                                     {{ $client->client_email_addresses[0]->email }}
@@ -43,6 +42,9 @@
                                 @if(isset($client->client_email_addresses[1]))
                                     {{ $client->client_email_addresses[1]->email }}
                                 @endif
+                            </td>
+                            <td>
+                                {{$client->description}}
                             </td>
                             <td><a href="{{ URL::route('clients.edit', $client->id) }}" class="btn btn-primary">Edit</a></td>
                         </tr>
