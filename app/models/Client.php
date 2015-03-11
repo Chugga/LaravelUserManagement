@@ -13,4 +13,8 @@ class Client extends \Eloquent {
     public function checklists() {
         return $this->hasMany('Checklist');
     }
+
+    public function client_email_addresses() {
+        return $this->hasMany('ClientEmailAddress');
+    }
 }

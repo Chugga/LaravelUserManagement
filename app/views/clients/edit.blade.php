@@ -23,15 +23,21 @@
                     {{ Form::label('description', 'Description') }}
                     {{ Form::text('description', null, array('id' => 'description', 'class' => 'form-control')) }}
                 </div>
-                <div class="form-group">
-                    {{ Form::label('email_one', 'Email One') }}
-                    {{ Form::email('email_one', null, array('id' => 'email_one', 'class' => 'form-control')) }}
+                @foreach($emails as $email)
+                    <div class="form-group">
+                        {{ Form::label('email', 'Email') }}
+                        {{ Form::email('email[]', $email->email, array('id' => 'email', 'class' => 'form-control')) }}
+                    </div>
+                @endforeach
+                <div id="email-container">
+                    <div class="form-group">
+                        {{ Form::label('email', 'Email') }}
+                        {{ Form::email('email[]', null, array('id' => 'email', 'class' => 'form-control')) }}
+                    </div>
                 </div>
                 <div class="form-group">
-                    {{ Form::label('email_two', 'Email Two') }}
-                    {{ Form::email('email_two', null, array('id' => 'email_two', 'class' => 'form-control')) }}
+                    <input id="add-email" type="button" class="btn btn-primary pull-right" value="Add Email" />
                 </div>
-
                 {{ Form::submit('Submit', array('class' => 'btn btn-success')) }}
             </div>
         </div>
@@ -40,7 +46,17 @@
 
 
 @section('javascripts')
+    <script>
+        var body = $("body");
 
+        body.on('click', '#add-email', function() {
+            $('#email-container').append('<div class="form-group"><label for="email">Email</label><input type="email" name="email[]" id="email" class="form-control" /></div>');
+        });
+
+        body.on('change', '.photo-upload',function() {
+            $(this).parent().parent().append($(this).parent().clone());
+        });
+    </script>
 @stop
 
 

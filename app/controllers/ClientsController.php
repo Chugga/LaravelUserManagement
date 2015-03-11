@@ -41,7 +41,14 @@ class ClientsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Client::create($data);
+        $emails = $data['email'];
+        unset($data['email']);
+
+		$client = Client::create($data);
+
+        foreach($emails as $email) {
+            ClientEmailAddress::create(['client_id' => $client->id, 'email' => $email]);
+        }
 
 		return Redirect::route('clients.index');
 	}
@@ -57,6 +64,7 @@ class ClientsController extends \BaseController {
         Assets::add('theme');
 		$client = Client::findOrFail($id);
 
+
 		return View::make('clients.show')
                 ->with('client', $client);
 	}
@@ -71,9 +79,11 @@ class ClientsController extends \BaseController {
 	{
         Assets::add('theme');
 		$client = Client::find($id);
+        $emails = ClientEmailAddress::where('client_id', '=', $id)->get();
 
 		return View::make('clients.edit')
-                ->with('client', $client);
+                ->with('client', $client)
+                ->with('emails', $emails);
 	}
 
 	/**
@@ -93,7 +103,15 @@ class ClientsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
+        $emails = $data['email'];
+        unset($data['email']);
+        ClientEmailAddress::where('client_id', '=', $id)->delete();
+
 		$client->update($data);
+
+        foreach($emails as $email) {
+            ClientEmailAddress::create(['client_id' => $id, 'email' => $email]);
+        }
 
 		return Redirect::route('clients.index');
 	}

@@ -159,7 +159,7 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
-        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+        $checklist = Checklist::with(array('client.client_email_addresses', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
@@ -180,10 +180,8 @@ class ChecklistsController extends \BaseController {
 
                 $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
 
-                $message->to($checklist->client->email_one);
-
-                if(!empty($checklist->client->email_two)) {
-                    $message->to($checklist->client->email_two);
+                foreach($checklist->client->client_email_addresses as $email) {
+                    $message->to($email);
                 }
 
                 $message->attach($filename);
