@@ -10,7 +10,7 @@ class ClientsController extends \BaseController {
 	public function index()
 	{
         Assets::add('theme');
-		$clients = Client::all();
+		$clients = Client::with('client_email_addresses')->get();
 
         return View::make('clients.index')
             ->with('clients', $clients);
