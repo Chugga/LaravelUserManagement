@@ -159,6 +159,17 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getMail($id) {
+
+        Assets::add('theme');
+        $checklist = Checklist::with('client.client_email_addresses')->findOrFail($id);
+
+        return View::make('checklists.mail')
+            ->with('checklist', $checklist);
+
+    }
+
+    public function postMail($id) {
+
         $checklist = Checklist::with(array('client.client_email_addresses', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
@@ -180,8 +191,18 @@ class ChecklistsController extends \BaseController {
 
                 $message->subject("Kelvin Court Inspection Report {$checklist->client->job_numbber}");
 
-                foreach($checklist->client->client_email_addresses as $email) {
-                    $message->to($email);
+                if(Input::has('emails') && count(Input::get('emails')) > 0) {
+
+                    foreach (Input::get('emails') as $email) {
+                        $message->to($email);
+                    }
+
+                } else {
+
+                    foreach ($checklist->client->client_email_addresses as $email) {
+                        $message->to($email->email);
+                    }
+
                 }
 
                 $message->attach($filename);
