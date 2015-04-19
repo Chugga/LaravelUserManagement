@@ -66,6 +66,8 @@ return array(
             'jquery-1.10.2.js',
             'jquery-ui-1.10.4.min.js',
             'jquery-ui.custom.min.js',
+            'jquery-ui.min.css',
+            'jquery-ui.theme.min.css',
             'plugins/metisMenu/jquery.metisMenu.js',
             'inspinia.js',
 			'bootstrap.min.css',
