@@ -43,7 +43,7 @@
             sortable.disableSelection();
 
             $("#reorder-form").submit(function( event ) {
-                var form_array = $( "#selector" ).sortable( "toArray" );
+                var form_array = $( "#sortable" ).sortable( "toArray" );
 
                 console.log(form_array);
 
