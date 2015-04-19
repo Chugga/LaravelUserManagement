@@ -78,7 +78,9 @@ class ChecklistsController extends \BaseController {
             $section_number++;
         }
 
-		return Redirect::route('clsubsections.edit', $subsection->id);
+		//return Redirect::route('clsubsections.edit', $subsection->id);
+
+        return Redirect::route('checklist.reorder', $checklist->id);
 	}
 
 	/**
@@ -90,7 +92,9 @@ class ChecklistsController extends \BaseController {
 	public function show($id)
 	{
         Assets::add('theme');
-		$checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+		$checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+            $q->orderBy('cl_subsections.subsection_number');
+        }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
@@ -149,8 +153,28 @@ class ChecklistsController extends \BaseController {
 		return Redirect::route('checklists.index');
 	}
 
+    public function getReorder($id) {
+
+        $checklist = Checklist::with(array('cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+            $q->orderBy('cl_subsections.subsection_number');
+        }))->findOrFail($id);
+
+        return View::make('checklists.reorder')
+            ->with('checklist', $checklist);
+    }
+
+    public function postReorder($id) {
+
+        echo "<pre>";
+        print_r(Input::all());
+        echo "</pre>";
+
+    }
+
     public function getPDF($id) {
-        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+            $q->orderBy('cl_subsections.subsection_number');
+        }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
             $q->with('cl_question_template', 'question_images');
         }))->findOrFail($id);
 
@@ -212,6 +236,6 @@ class ChecklistsController extends \BaseController {
             return Redirect::back()->with('message_error', 'Failed to send email.');
         }
 
-        return Redirect::back()->with('message_success', 'Report sent.');
+        return Redirect::route('checklists.index')->with('message_success', 'Report sent.');
     }
 }
