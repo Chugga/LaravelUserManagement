@@ -18,8 +18,8 @@
                 @foreach($checklist->client->client_email_addresses as $email)
                     <div class="checkbox">
                         <label for="{{ $email->email }}">
-                            {{ $email->email }}
                             {{ Form::checkbox('emails[]', $email->email, false, array('id' => $email->email)) }}
+                            {{ $email->email }}
                         </label>
                     </div>
                 @endforeach
