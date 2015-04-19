@@ -92,11 +92,11 @@ class ChecklistsController extends \BaseController {
 	public function show($id)
 	{
         Assets::add('theme');
-		$checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+		$checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections' => function($q) {
             $q->orderBy('cl_subsections.subsection_number');
         }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
-        }))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template'))->findOrFail($id);
 
 		return View::make('checklists.show')
             ->with('checklist', $checklist)
@@ -155,9 +155,9 @@ class ChecklistsController extends \BaseController {
 
     public function getReorder($id) {
 
-        $checklist = Checklist::with(array('cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+        $checklist = Checklist::with(array('cl_sections.cl_subsections' => function($q) {
             $q->orderBy('cl_subsections.subsection_number');
-        }))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template'))->findOrFail($id);
 
         return View::make('checklists.reorder')
             ->with('checklist', $checklist);
@@ -172,11 +172,11 @@ class ChecklistsController extends \BaseController {
     }
 
     public function getPDF($id) {
-        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template' => function($q) {
+        $checklist = Checklist::with(array('client', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections' => function($q) {
             $q->orderBy('cl_subsections.subsection_number');
         }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
             $q->with('cl_question_template', 'question_images');
-        }))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template'))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
         return $pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf');
