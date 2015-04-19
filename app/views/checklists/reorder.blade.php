@@ -16,8 +16,8 @@
                 <h1>Reorder the Checklist Subsections</h1>
                 {{ Form::open(array('route' => array('checklists.reorder', $checklist->id), 'method' => 'post', 'id' => 'reorder-form')) }}
                 <ul id="sortable">
-                    @foreach($checklist->cl_section as $section)
-                        @foreach($section->cl_subsection as $subsection)
+                    @foreach($checklist->cl_sections as $section)
+                        @foreach($section->cl_subsections as $subsection)
                             <li id="{{ $subsection->id }}" class="ui-state-default">{{ $subsection->cl_subsection_template->name }}</li>
                         @endforeach
                     @endforeach
