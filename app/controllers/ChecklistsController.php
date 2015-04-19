@@ -78,7 +78,7 @@ class ChecklistsController extends \BaseController {
             $section_number++;
         }
 
-        return Redirect::route('checklist.reorder', $checklist->id);
+        return Redirect::route('checklists.reorder', $checklist->id);
 	}
 
 	/**
