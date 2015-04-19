@@ -83,7 +83,7 @@
                                         <div class="together">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->pass ? "Passed" : $question->answer }}</p>
+                                                    <p><strong>{{ $i++ }}. {{ $question->cl_question_template->question }}: </strong>{{ $question->pass ? "Passed" : (strlen($question->answer) > 0 ? $question->answer : "Failed") }}</p>
                                                 </div>
                                             </div>
                                             <div class="row">
