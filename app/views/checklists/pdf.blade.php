@@ -75,7 +75,7 @@
                         @foreach($section->cl_subsections as $subsection)
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }}@endif</h3>
+                                    <h3>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }} @if($bedroom == 2) (Master) @endif @endif </h3>
                                     @if(strlen($subsection->comments) > 0)
                                         <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
                                     @endif
