@@ -43,14 +43,20 @@
             sortable.disableSelection();
 
             $("#reorder-form").submit(function( event ) {
+                var form_array = $( "#selector" ).sortable( "toArray" );
 
-                $.each($( "#selector" ).sortable( "toArray" ), function(key, val) {
+                console.log(form_array);
+
+                for(var i = 0; i < form_array.length; i++) {
+
                     var input = $("<input>")
                             .attr("type", "hidden")
-                            .attr("name", "cl_subsections[ " + key + "]")
-                            .val(val);
+                            .attr("name", "cl_subsections[ " + i + "]")
+                            .val(form_array[i]);
                     $('#reorder-form').append($(input));
-                });
+
+                    console.log(input);
+                }
 
             });
         });
