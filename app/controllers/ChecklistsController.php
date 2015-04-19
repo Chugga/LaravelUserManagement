@@ -78,8 +78,6 @@ class ChecklistsController extends \BaseController {
             $section_number++;
         }
 
-		//return Redirect::route('clsubsections.edit', $subsection->id);
-
         return Redirect::route('checklist.reorder', $checklist->id);
 	}
 
@@ -166,10 +164,25 @@ class ChecklistsController extends \BaseController {
 
     public function postReorder($id) {
 
-        echo "<pre>";
-        print_r(Input::all());
-        echo "</pre>";
+        if(Input::has('cl_subsections')) {
 
+            foreach(Input::get('cl_subsections') as $key => $sub_id) {
+
+                ClSubsection::find($sub_id)->update(array('subsection_number' => $key));
+
+            }
+
+        }
+
+        $checklist = Checklist::whereId($id)->with(array('cl_sections' => function($q) {
+            $q->whereHas('cl_subsections', function($q) {
+                $q->whereSubsectionNumber(0);
+            })->with(array('cl_subsections' => function($q) {
+                $q->whereSubsectionNumber(0);
+            }));
+        }))->first();
+
+        return Redirect::route('clsubsections.edit', $checklist->cl_sections[0]->cl_subsections[0]->id);
     }
 
     public function getPDF($id) {
