@@ -19,7 +19,7 @@
                     <div class="checkbox">
                         <label for="{{ $email->email }}">
                             {{ $email->email }}
-                            {{ Form::checkbox('emails[]', $email->email, false, array('id' => $email->email, 'class' => 'form-control')) }}
+                            {{ Form::checkbox('emails[]', $email->email, false, array('id' => $email->email)) }}
                         </label>
                     </div>
                 @endforeach
