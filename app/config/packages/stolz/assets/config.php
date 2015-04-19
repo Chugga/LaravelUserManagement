@@ -68,6 +68,7 @@ return array(
             'jquery-ui.custom.min.js',
             'jquery-ui.min.css',
             'jquery-ui.theme.min.css',
+            'jquery.ui.touch-punch.min.js',
             'plugins/metisMenu/jquery.metisMenu.js',
             'inspinia.js',
 			'bootstrap.min.css',
