@@ -154,6 +154,7 @@ class ChecklistsController extends \BaseController {
 	}
 
     public function getReorder($id) {
+        Assets::add('theme');
 
         $checklist = Checklist::with(array('cl_sections.cl_subsections' => function($q) {
             $q->orderBy('cl_subsections.subsection_number');
