@@ -48,9 +48,27 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>{{ $subsection->cl_subsection_template->name }} @if($subsection->cl_subsection_template->name == 'Bedroom'){{ $bedroom++ }} @if($bedroom == 2) (Master) @endif @endif</h3>
-                                @if(strlen($subsection->comments) > 0)
-                                    <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
-                                @endif
+                                <div class="together">
+                                    @if(strlen($subsection->comments) > 0)
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><strong>Notes:</strong> {{ $subsection->comments or 'none' }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if(count($subsection->subsection_images) > 0)
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                @foreach($subsection->subsection_images as $image)
+                                                    @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/subsection' . $image->filename))
+                                                        <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:46%; margin-left:1%; margin-right:1%" />
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <br />
                                 @foreach($subsection->cl_questions as $question)
                                     <div class="row">
                                         <div class="col-md-12">

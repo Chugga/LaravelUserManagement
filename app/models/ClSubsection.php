@@ -21,4 +21,8 @@ class ClSubsection extends \Eloquent {
     public function cl_questions() {
         return $this->hasMany('ClQuestion');
     }
+
+    public function subsection_images() {
+        return $this->hasMany('SubsectionImage');
+    }
 }

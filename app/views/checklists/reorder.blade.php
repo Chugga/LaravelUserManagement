@@ -45,8 +45,6 @@
             $("#reorder-form").submit(function( event ) {
                 var form_array = $( "#sortable" ).sortable( "toArray" );
 
-                console.log(form_array);
-
                 for(var i = 0; i < form_array.length; i++) {
 
                     var input = $("<input>")
@@ -55,7 +53,6 @@
                             .val(form_array[i]);
                     $('#reorder-form').append($(input));
 
-                    console.log(input);
                 }
 
             });

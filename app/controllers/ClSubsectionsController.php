@@ -111,6 +111,30 @@ class ClSubsectionsController extends \BaseController {
             $clsubsection->save();
         }
 
+        if(Input::has('comment_photos')) {
+            $comment_photos = Input::get('comment_photos');
+            if(!empty($comment_photos)) {
+                foreach($comment_photos as $photo) {
+                    if(!empty($photo)) {
+                        $image = SubsectionImage::create(array('cl_subsection_id' => $id));
+                        $image->filename = $image->id . "." . $photo->getClientOriginalExtension();
+                        $image->save();
+                        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/photos/subsection';
+                        $filename =  $image->id . "." . $photo->getClientOriginalExtension();
+                        $photo->move($filepath, $filename);
+                        Image::make("$filepath/$filename")
+                            ->widen(1080, function ($constraint) {
+                                $constraint->upsize();
+                            })
+                            ->heighten(1080, function ($constraint) {
+                                $constraint->upsize();
+                            })
+                            ->save();
+                    }
+                }
+            }
+        }
+
         foreach($questions as $id => $question) {
             $question_mod = ClQuestion::find($id);
             $question_mod->pass = isset($question['pass']);

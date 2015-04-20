@@ -94,7 +94,7 @@ class ChecklistsController extends \BaseController {
             $q->orderBy('cl_subsections.subsection_number');
         }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
-        }, 'cl_sections.cl_subsections.cl_subsection_template'))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.subsection_images'))->findOrFail($id);
 
 		return View::make('checklists.show')
             ->with('checklist', $checklist)
@@ -190,7 +190,7 @@ class ChecklistsController extends \BaseController {
             $q->orderBy('cl_subsections.subsection_number');
         }, 'cl_sections.cl_subsections.cl_questions' => function($q) {
             $q->with('cl_question_template', 'question_images');
-        }, 'cl_sections.cl_subsections.cl_subsection_template'))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.subsection_images'))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
         return $pdf->download('Kelvin Court Inspection Report ' . $checklist->id . '.pdf');
@@ -208,9 +208,11 @@ class ChecklistsController extends \BaseController {
 
     public function postMail($id) {
 
-        $checklist = Checklist::with(array('client.client_email_addresses', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.cl_questions' => function($q) {
+        $checklist = Checklist::with(array('client.client_email_addresses', 'user', 'checklist_images', 'cl_sections.cl_section_template', 'cl_sections.cl_subsections' => function($q) {
+            $q->orderBy('cl_subsections.subsection_number');
+        },'cl_sections.cl_subsections.cl_questions' => function($q) {
                 $q->with('cl_question_template', 'question_images');
-        }))->findOrFail($id);
+        }, 'cl_sections.cl_subsections.cl_subsection_template', 'cl_sections.cl_subsections.subsection_images'))->findOrFail($id);
 
         $pdf = PDF::loadView('checklists.pdf', ['checklist' => $checklist, 'i' => 1, 'bedroom' => 1]);
 
