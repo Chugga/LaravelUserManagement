@@ -62,11 +62,11 @@
                     {{ Form::label("comments", 'Notes') }}
                     {{ Form::textarea("comments", $cl_subsection->comments, array('id' => "comments", 'class' => 'form-control', 'rows' => '2', 'cols' => 50)) }}
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {{ Form::label("comment_photos[]", 'Upload Image') }}
-                        {{ Form::file("comment_photos[]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
-                    </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    {{ Form::label("comment_photos[]", 'Upload Image') }}
+                    {{ Form::file("comment_photos[]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
                 </div>
             </div>
         </div>
