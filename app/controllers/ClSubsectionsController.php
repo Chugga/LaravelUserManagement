@@ -116,7 +116,7 @@ class ClSubsectionsController extends \BaseController {
             if(!empty($comment_photos)) {
                 foreach($comment_photos as $photo) {
                     if(!empty($photo)) {
-                        $image = SubsectionImage::create(array('cl_subsection_id' => $id));
+                        $image = SubsectionImage::create(array('cl_subsection_id' => $clsubsection->id));
                         $image->filename = $image->id . "." . $photo->getClientOriginalExtension();
                         $image->save();
                         $filepath = $_SERVER['DOCUMENT_ROOT'] . '/photos/subsection';
