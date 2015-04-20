@@ -60,8 +60,8 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 @foreach($subsection->subsection_images as $image)
-                                                    @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/subsection' . $image->filename))
-                                                        <img src="{{ Request::root() }}/photos/{{ $image->filename }}" style="max-width:46%; margin-left:1%; margin-right:1%" />
+                                                    @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/subsection/' . $image->filename))
+                                                        <img src="{{ Request::root() }}/photos/subsection/{{ $image->filename }}" style="max-width:46%; margin-left:1%; margin-right:1%" />
                                                     @endif
                                                 @endforeach
                                             </div>

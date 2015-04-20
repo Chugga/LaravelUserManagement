@@ -111,8 +111,8 @@ class ClSubsectionsController extends \BaseController {
             $clsubsection->save();
         }
 
-        if(Input::has('comment_photos')) {
-            $comment_photos = Input::get('comment_photos');
+        if(isset(Input::all()['comment_photos'] )) {
+            $comment_photos = Input::all()['comment_photos'];
             if(!empty($comment_photos)) {
                 foreach($comment_photos as $photo) {
                     if(!empty($photo)) {
