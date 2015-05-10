@@ -108,25 +108,40 @@
                 }
             });
 
+            $('.photo-upload').each(function(index) {
+
+                addUploader(this);
+
+            });
+
             body.on('change', '.photo-upload',function() {
-                $(this).parent().parent().append($(this).parent().clone());
+
+                var newEle = $(this).parent().clone();
+
+                $(this).parent().parent().append(newEle);
+
+                addUploader(newEle);
+
+            });
+
+            function addUploader(ele) {
 
                 var route;
 
-                if($(this).attr('qId') !== null) {
+                if($(ele).attr('qId') !== null) {
 
-                    route = 'clquestionimages/' + $(this).attr('qId');
+                    route = 'clquestionimages/' + $(ele).attr('qId');
 
-                } else if($(this).attr('subSectionId') !== null) {
+                } else if($(ele).attr('subSectionId') !== null) {
 
-                    route = 'clsubsections/' + $(this).attr('subSectionId') + '/image';
+                    route = 'clsubsections/' + $(ele).attr('subSectionId') + '/image';
 
                 }
 
-                var section = $(this).parent();
+                var section = $(ele).parent();
 
                 var uploader = new ImageUploader({
-                    inputElement : this,
+                    inputElement : ele,
                     uploadUrl : route,
                     onProgress : function(event) {
                         section.find('.progress').text('Completed '+event.done+' files of '+event.total+' total.');
@@ -138,7 +153,7 @@
                     onComplete : function(event) {
                         section.find('.progress').text('Completed all '+event.done+' files!');
                         section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
-                        $(this).replaceWith( $(this).clone( true ) );
+                        $(ele).replaceWith( $(ele).clone( ele ) );
                     },
                     maxWidth: 1080,
                     maxHeight: 1080,
@@ -147,8 +162,7 @@
                     debug : true
                 });
 
-
-            });
+            }
         });
     </script>
 @stop
