@@ -76,6 +76,7 @@ return array(
             'font-awesome.min.css',
             'animate.css',
             'style.min.css',
+            'ImageUploader.js'
 		),
 
         'datatables' => array(

@@ -190,4 +190,10 @@ class ClSubsectionsController extends \BaseController {
 		return Redirect::route('clsubsections.index');
 	}
 
+    public function postImage($id) {
+
+
+
+    }
+
 }

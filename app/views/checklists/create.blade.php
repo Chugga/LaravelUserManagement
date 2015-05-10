@@ -84,15 +84,19 @@
 
         {{ Form::submit('Submit', array('class' => 'btn btn-success pull-right')) }}
     </div>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img src="" id="img-upload" style="display:none;" />
 @stop
 
 
 @section('javascripts')
 <script>
     $(document).ready(function(){
+
         $('#datetimepicker1').datetimepicker({
             useCurrent: true
         });
+
     });
 </script>
 @stop

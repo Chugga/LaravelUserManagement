@@ -24,6 +24,8 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('checklists/{id}/reorder', array('uses' => 'ChecklistsController@postReorder', 'as' => 'checklists.reorder'));
     Route::resource('clsections', 'ClSectionsController');
     Route::resource('clsubsections', 'ClSubsectionsController');
+    Route::post('clsubsections/{id}/image', array('uses' => 'ClSubsectionsController@postImage', 'as' => 'clsubsections.image'));
+    Route::post('clquestionimages/{questionId}', array('uses' => 'QuestionImagesController@store', 'as' => 'questionimages.store'));
     Route::get('/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
 });
 

@@ -48,7 +48,10 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {{ Form::label("question[$question->id][photo][]", 'Upload Image') }}
-                                    {{ Form::file("question[$question->id][photo][]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
+                                    {{ Form::file("question[$question->id][photo][]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple', 'qId' => $question->id)) }}
+                                    <div class="progress"></div>
+                                    <div class="fileProgress"></div>
+                                    <div class="progressbar"></div>
                                 </div>
                             </div>
                         @endif
@@ -66,7 +69,10 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {{ Form::label("comment_photos[]", 'Upload Image') }}
-                    {{ Form::file("comment_photos[]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple')) }}
+                    {{ Form::file("comment_photos[]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple', 'subSectionId' => $cl_subsection->id)) }}
+                    <div class="progress"></div>
+                    <div class="fileProgress"></div>
+                    <div class="progressbar"></div>
                 </div>
             </div>
         </div>
@@ -75,6 +81,7 @@
                 {{ Form::submit('Save and Next', array('class' => 'btn btn-success pull-right')) }}
             </div>
         </div>
+
         {{ Form::close() }}
     </div>
 @stop
@@ -100,6 +107,44 @@
 
             body.on('change', '.photo-upload',function() {
                 $(this).parent().parent().append($(this).parent().clone());
+
+                var route;
+
+                if($(this).attr('qId') !== null) {
+
+                    route = 'clquestionimages/' + $(this).attr('qId');
+
+                } else if($(this).attr('subSectionId') !== null) {
+
+                    route = 'clsubsections/' + $(this).attr('subSectionId') + '/image';
+
+                }
+
+                var section = $(this).parent();
+
+                var uploader = new ImageUploader({
+                    inputElement : $(this),
+                    uploadUrl : route,
+                    onProgress : function(event) {
+                        section.find('.progress').text('Completed '+event.done+' files of '+event.total+' total.');
+                        section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 })
+                    },
+                    onFileComplete : function(event, file) {
+                        section.find('.fileProgress').append('Finished file '+file.fileName+' with response from server '+event.target.status+'<br />');
+                    },
+                    onComplete : function(event) {
+                        section.find('.progress').text('Completed all '+event.done+' files!');
+                        section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
+                        $(this).replaceWith( $(this).clone( true ) );
+                    },
+                    maxWidth: 1080,
+                    maxHeight: 1080,
+                    quality: 0.95,
+                    //timeout: 5000,
+                    debug : true
+                });
+
+
             });
         });
     </script>
