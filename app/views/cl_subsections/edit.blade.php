@@ -120,7 +120,7 @@
 
                 $(this).parent().parent().append(newEle);
 
-                addUploader(newEle);
+                addUploader(newEle.find('.photo-upload')[0]);
 
             });
 
@@ -130,11 +130,11 @@
 
                 if($(ele).attr('qId') !== null) {
 
-                    route = 'clquestionimages/' + $(ele).attr('qId');
+                    route = '/clquestionimages/' + $(ele).attr('qId');
 
                 } else if($(ele).attr('subSectionId') !== null) {
 
-                    route = 'clsubsections/' + $(ele).attr('subSectionId') + '/image';
+                    route = '/clsubsections/' + $(ele).attr('subSectionId') + '/image';
 
                 }
 
