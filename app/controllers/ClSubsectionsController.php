@@ -192,7 +192,7 @@ class ClSubsectionsController extends \BaseController {
 
     public function postImage($id) {
 
-        return Response::json([$id, Input::all()]);
+        return Response::json([$id, file_get_contents('php://input')]);
 
     }
 
