@@ -16,7 +16,7 @@ class QuestionImagesController extends \BaseController {
 
         $data = explode(',', $base64_string);
 
-        fwrite($ifp, base64_decode($data[1]));
+        fwrite($ifp, base64_decode($data[0]));
         fclose($ifp);
 
         return $output_file;

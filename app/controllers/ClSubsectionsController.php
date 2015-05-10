@@ -111,7 +111,7 @@ class ClSubsectionsController extends \BaseController {
             $clsubsection->save();
         }
 
-        if(isset(Input::all()['comment_photos'] )) {
+        /*if(isset(Input::all()['comment_photos'] )) {
             $comment_photos = Input::all()['comment_photos'];
             if(!empty($comment_photos)) {
                 foreach($comment_photos as $photo) {
@@ -133,7 +133,7 @@ class ClSubsectionsController extends \BaseController {
                     }
                 }
             }
-        }
+        }*/
 
         foreach($questions as $id => $question) {
             $question_mod = ClQuestion::find($id);
@@ -205,7 +205,7 @@ class ClSubsectionsController extends \BaseController {
 
         $data = explode(',', $base64_string);
 
-        fwrite($ifp, base64_decode($data[1]));
+        fwrite($ifp, base64_decode($data[0]));
         fclose($ifp);
 
         return $output_file;
