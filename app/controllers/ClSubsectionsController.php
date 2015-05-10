@@ -193,6 +193,8 @@ class ClSubsectionsController extends \BaseController {
     public function postImage($id) {
 
         $image = SubsectionImage::create(array('cl_subsection_id' => $id));
+        $image->filename = $image->id . ".jpg";
+        $image->save();
 
         $this->base64_to_jpeg(file_get_contents('php://input'),  $_SERVER['DOCUMENT_ROOT'] . '/photos/subsection/' . $image->id . '.jpg');
 

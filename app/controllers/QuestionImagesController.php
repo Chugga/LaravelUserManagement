@@ -4,6 +4,8 @@ class QuestionImagesController extends \BaseController {
 
     public function store($questionId) {
         $image = QuestionImage::create(array('cl_question_id' => $questionId));
+        $image->filename = $image->id . ".jpg";
+        $image->save();
 
         $this->base64_to_jpeg(file_get_contents('php://input'),  $_SERVER['DOCUMENT_ROOT'] . '/photos/' . $image->id . '.jpg');
 

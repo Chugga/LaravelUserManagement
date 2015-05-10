@@ -153,7 +153,7 @@
                         section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
                     },
                     onFileComplete : function(event, file) {
-                        section.find('.fileProgress').append('Finished file '+file.fileName+' with response from server '+event.target.status+'<br />');
+                        section.find('.fileProgress').append('File uploaded successfully. <br />');
                     },
                     onComplete : function(event) {
                         section.find('.progress').text('Completed all '+event.done+' files!');
@@ -162,8 +162,8 @@
 
                         inProgress--;
                     },
-                    maxWidth: 1080,
-                    maxHeight: 1080,
+                    maxWidth: 800,
+                    maxHeight: 800,
                     quality: 0.95,
                     //timeout: 5000,
                     debug : true
@@ -177,7 +177,7 @@
 
                     e.preventDefault();
 
-                    alert("Please wait until all files have finishing Uploading.");
+                    alert("Please wait until all files have finishing uploading.");
 
                 }
 
