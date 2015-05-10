@@ -36,6 +36,9 @@
                                 <div class="form-group">
                                     {{ Form::label("question[$question->id][photo][]", 'Upload Image') }}
                                     {{ Form::file("question[$question->id][photo][]", array('accept' => "image/*;capture=camera", 'class' => 'form-control photo-upload', 'multiple', 'qId' => $question->id)) }}
+                                    <div class="progress"></div>
+                                    <div class="fileProgress"></div>
+                                    <div class="progressbar"></div>
                                 </div>
                             </div>
                         @else
