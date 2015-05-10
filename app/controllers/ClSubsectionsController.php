@@ -141,7 +141,7 @@ class ClSubsectionsController extends \BaseController {
             if(!empty($question['answer'])) $question_mod->answer = $question['answer'];
             $question_mod->save();
 
-            if(!empty($question['photo'])) {
+            /*if(!empty($question['photo'])) {
                 foreach($question['photo'] as $photo) {
                     if(!empty($photo)) {
                         $image = QuestionImage::create(array('cl_question_id' => $id));
@@ -160,7 +160,7 @@ class ClSubsectionsController extends \BaseController {
                             ->save();
                     }
                 }
-            }
+            }*/
         }
 
         $next_subsection = ClSubsection::whereSubsectionNumber($clsubsection->subsection_number+1)->whereHas('cl_section', function($q) use ($clsubsection) {
@@ -192,8 +192,23 @@ class ClSubsectionsController extends \BaseController {
 
     public function postImage($id) {
 
-        return Response::json([$id, file_get_contents('php://input')]);
+        $image = SubsectionImage::create(array('cl_subsection_id' => $id));
 
+        $this->base64_to_jpeg(file_get_contents('php://input'),  $_SERVER['DOCUMENT_ROOT'] . '/photos/subsection/' . $image->id . '.jpg');
+
+        return Response::json();
+
+    }
+
+    private function base64_to_jpeg($base64_string, $output_file) {
+        $ifp = fopen($output_file, "wb");
+
+        $data = explode(',', $base64_string);
+
+        fwrite($ifp, base64_decode($data[1]));
+        fclose($ifp);
+
+        return $output_file;
     }
 
 }

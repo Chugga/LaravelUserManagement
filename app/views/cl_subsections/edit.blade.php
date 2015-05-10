@@ -13,7 +13,7 @@
     <div class="content">
         <h1>Job Number {{ $checklist->job_number or 'N/A' }}</h1>
         <h2>{{ $cl_subsection->cl_subsection_template->name }}</h2>
-        {{ Form::open(array('route' => array('clsubsections.update', $cl_subsection->id), 'method' => 'put', 'class' => '', 'files' => true)) }}
+        {{ Form::open(array('route' => array('clsubsections.update', $cl_subsection->id), 'method' => 'put', 'class' => '', 'files' => true, 'id' => 'form')) }}
         @foreach($cl_subsection->cl_questions as $question)
             <div class="row">
                 <div class="col-md-12">
@@ -91,6 +91,9 @@
 
 @section('javascripts')
     <script>
+
+        var inProgress = 0;
+
         $(document).ready(function(){
             $('#datetimepicker1').datetimepicker({
                 useCurrent: true
@@ -122,6 +125,8 @@
 
                 addUploader(newEle.find('.photo-upload')[0]);
 
+                inProgress++;
+
             });
 
             function addUploader(ele) {
@@ -145,7 +150,7 @@
                     uploadUrl : route,
                     onProgress : function(event) {
                         section.find('.progress').text('Completed '+event.done+' files of '+event.total+' total.');
-                        section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 })
+                        section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
                     },
                     onFileComplete : function(event, file) {
                         section.find('.fileProgress').append('Finished file '+file.fileName+' with response from server '+event.target.status+'<br />');
@@ -154,6 +159,8 @@
                         section.find('.progress').text('Completed all '+event.done+' files!');
                         section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
                         $(ele).replaceWith( $(ele).clone( ele ) );
+
+                        inProgress--;
                     },
                     maxWidth: 1080,
                     maxHeight: 1080,
@@ -163,6 +170,18 @@
                 });
 
             }
+
+            $('#form').on('submit', function(e) {
+
+                if(inProgress > 0) {
+
+                    e.preventDefault();
+
+                    alert("Please wait until all files have finishing Uploading.");
+
+                }
+
+            });
         });
     </script>
 @stop
