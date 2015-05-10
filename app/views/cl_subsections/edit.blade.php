@@ -128,11 +128,11 @@
 
                 var route;
 
-                if($(ele).attr('qId') !== null) {
+                if(typeof $(ele).attr('qId') !== 'undefined') {
 
                     route = '/clquestionimages/' + $(ele).attr('qId');
 
-                } else if($(ele).attr('subSectionId') !== null) {
+                } else if(typeof $(ele).attr('subSectionId') !== 'undefined') {
 
                     route = '/clsubsections/' + $(ele).attr('subSectionId') + '/image';
 
