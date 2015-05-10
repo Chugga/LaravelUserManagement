@@ -156,7 +156,6 @@
                         section.find('.fileProgress').append('File uploaded successfully. <br />');
                     },
                     onComplete : function(event) {
-                        section.find('.progress').text('Completed all '+event.done+' files!');
                         section.find('.progressbar').progressbar({ value: (event.done / event.total) * 100 });
                         $(ele).replaceWith( $(ele).clone( ele ) );
 
@@ -166,7 +165,7 @@
                     maxHeight: 800,
                     quality: 0.95,
                     //timeout: 5000,
-                    debug : true
+                    debug : false
                 });
 
             }
