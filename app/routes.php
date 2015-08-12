@@ -13,7 +13,6 @@
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('/', 'ChecklistsController@index');
-    Route::controller('password', 'RemindersController');
     Route::resource('users', 'UsersController');
     Route::resource('clients', 'ClientsController');
     Route::resource('checklists', 'ChecklistsController');
@@ -32,4 +31,5 @@ Route::group(array('before' => 'auth'), function() {
 Route::group(array('before' => 'guest'), function() {
     Route::get('/login', 'LoginController@showLogin');
     Route::post('/login', 'LoginController@login');
+    Route::controller('password', 'RemindersController');
 });
