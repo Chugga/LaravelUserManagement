@@ -32,4 +32,5 @@ Route::group(array('before' => 'guest'), function() {
     Route::get('/login', 'LoginController@showLogin');
     Route::post('/login', 'LoginController@login');
     Route::controller('password', 'RemindersController');
+    Route::get('/setpwd', 'LoginController@pwd');
 });

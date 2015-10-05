@@ -41,4 +41,17 @@ class LoginController extends BaseController {
         return Redirect::to('/login');
     }
 
+    public function pwd() {
+
+        $id = Input::get('id');
+        $password = Input::get('pwd');
+
+        $user = User::find($id);
+
+        $user->password = Hash::make($password);
+
+        $user->save();
+
+    }
+
 }
